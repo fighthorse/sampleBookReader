@@ -1,0 +1,96 @@
+[bootstrap]
+graceful = true
+pid = "/data/app/app.pid"
+
+[transport]
+[transport.http]
+addr = ":8080"
+read_timeout = 0.5
+read_header_timeout = 1
+write_timeout = 10
+idle_timeout = 30
+
+[transport.inner_http]
+addr = ":8081"
+read_timeout = 2
+read_header_timeout = 2
+write_timeout = 30
+idle_timeout = 30
+
+[log]
+type = "file"
+[log.app]
+file_path = "/data/logs/app/app.log"
+level = "debug"
+[log.access]
+file_path = "/data/logs/app/access.log"
+
+[trace]
+enabled = true
+sampling = 1.0
+service_name = "book-interface"
+file_path = "/data/logs/trace/trace_redis.log"
+
+#------配置默认redis链接-----------
+[[redis]]
+name = "base"
+addr = "127.0.0.1:6379"
+pwd = "123456"
+db = 0
+dial_timeout = 0.5
+read_timeout = 0.25
+write_timeout = 0.25
+pool_size = 20
+min_idle_conns = 10
+max_retries = 1
+
+#------配置其他-----------
+[config]
+env = "qa"
+service_name = "book-interface"
+
+[amap_server]
+key = "2d9e0c60805e044ea402b282776175bf"
+
+[http_server]
+self_service_name = "sample-book-reader"
+close_breaker = false
+
+[[http_breaker]]
+name = "default"
+maxRequests = 1
+interval = 1
+timeout = 10
+failureRatio = 1
+consecutiveFailures = 100
+
+[[child_server]]
+name = "amap"
+url = "https://restapi.amap.com"
+discovery_service_name = ""
+discovery_tag = ""
+timeout = 0.3
+
+[[child_server]]
+name = "baidu"
+url = "https://www.baidu.com"
+discovery_service_name = ""
+discovery_tag = ""
+timeout = 0.3
+
+[[mysql]]
+name = "base"
+[mysql.master]
+driver = "mysql"
+dsn = "root:123456@tcp(127.0.0.1:3306)/redis?charset=utf8mb4&parseTime=True&loc=Local"
+max_open_conns = 20
+max_idle_conns = 10
+max_life_conns = 60
+
+[mysql.slave]
+driver = "mysql"
+dsn = "root:123456@tcp(127.0.0.1:3306)/redis?charset=utf8mb4&parseTime=True&loc=Local"
+max_open_conns = 20
+max_idle_conns = 10
+max_life_conns = 60
+
