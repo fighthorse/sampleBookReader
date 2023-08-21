@@ -61,6 +61,8 @@ func main() {
 	httpserver.Init()
 	//redis
 	redis.Init()
+	//mysql
+	mysql.Init()
 	// start server
 	//gin.SetMode(gin.ReleaseMode)
 	// Creates a router without any middleware by default

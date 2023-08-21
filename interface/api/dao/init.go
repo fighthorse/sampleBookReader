@@ -11,6 +11,8 @@ import (
 func InitComponent() {
 	// redis cfg
 	trace_redis.InitCfg(conf.GConfig.Redis)
+	// mysql cfg
+
 	// http cfg
 	httpclient.Init(conf.GConfig.HttpServer)
 	httpclient.InitCircuitBreaker(conf.GConfig.HttpBreaker)
