@@ -14,6 +14,7 @@ import (
 	"github.com/fighthorse/sampleBookReader/interface/api/dao"
 	"github.com/fighthorse/sampleBookReader/interface/api/dao/httpserver"
 	"github.com/fighthorse/sampleBookReader/interface/api/dao/middleware"
+	"github.com/fighthorse/sampleBookReader/interface/api/dao/mysql"
 	"github.com/fighthorse/sampleBookReader/interface/api/dao/redis"
 )
 
