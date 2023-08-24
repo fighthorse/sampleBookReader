@@ -18,11 +18,13 @@ write_timeout = 30
 idle_timeout = 30
 
 [log]
-type = "file"
+type = ""
 [log.app]
+enable = true
 file_path = "/data/logs/app/app.log"
 level = "debug"
 [log.access]
+enable = true
 file_path = "/data/logs/app/access.log"
 
 [trace]

@@ -25,13 +25,21 @@ type (
 )
 
 var (
-	SrvLogger = &srvlogger{
-		appLogger: zerolog.New(os.Stdout).With().Timestamp().Logger(),
-	}
+	SrvLogger = &srvlogger{}
 )
 
 func Init() {
-	{
+
+	if conf.GConfig.Log.LogType != "file" {
+		if conf.GConfig.Log.App.Enable {
+			SrvLogger.appLogger = zerolog.New(os.Stdout).With().Timestamp().Logger()
+		}
+		if conf.GConfig.Log.Access.Enable {
+			SrvLogger.accessLogger = zerolog.New(os.Stdout).With().Timestamp().Logger()
+		}
+		return
+	}
+	if conf.GConfig.Log.App.Enable {
 		// 初始化业务日志
 		fileName := conf.GConfig.Log.App.FilePath
 		fmt.Println("AppLogPath:" + fileName)
@@ -55,7 +63,7 @@ func Init() {
 		SrvLogger.appLogger = zerolog.New(w).Level(l).With().Timestamp().Logger()
 	}
 
-	{
+	if conf.GConfig.Log.Access.Enable {
 		// 初始化访问日志
 		fileName := conf.GConfig.Log.Access.FilePath
 		fmt.Println("AppAccessLogPath:" + fileName)
