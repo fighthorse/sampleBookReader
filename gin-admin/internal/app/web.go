@@ -3,8 +3,8 @@ package app
 import (
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	swaggerFiles "github.com/swaggo/gin-swagger/swaggerFiles"
 
 	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
 	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/middleware"
