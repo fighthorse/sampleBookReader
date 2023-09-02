@@ -3,9 +3,9 @@ package api
 import (
 	"fmt"
 
+	"github.com/fighthorse/captcha"
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
-	"github.com/fighthorse/sampleBookReader/captcha"
 
 	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
 	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/contextx"

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/fighthorse/sampleBookReader/captcha"
+	"github.com/fighthorse/captcha"
 	"github.com/google/wire"
 
 	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao"
