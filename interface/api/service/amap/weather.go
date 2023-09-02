@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetIpWeather(c *gin.Context, ip string) interface{} {
+func (s *Service) GetIpWeather(c *gin.Context, ip string) interface{} {
 	if ip == "" {
 		ip = c.ClientIP()
 	}

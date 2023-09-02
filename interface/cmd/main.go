@@ -3,18 +3,19 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/fighthorse/sampleBookReader/interface/api/service"
+	"net/http"
+	"path/filepath"
+
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/spf13/viper"
-	"net/http"
-	"path/filepath"
 
 	"github.com/fighthorse/sampleBookReader/interface/api/conf"
 	"github.com/fighthorse/sampleBookReader/interface/api/controller"
 	"github.com/fighthorse/sampleBookReader/interface/api/dao"
 	"github.com/fighthorse/sampleBookReader/interface/api/dao/httpserver"
 	"github.com/fighthorse/sampleBookReader/interface/api/dao/middleware"
-	"github.com/fighthorse/sampleBookReader/interface/api/dao/mysql"
 	"github.com/fighthorse/sampleBookReader/interface/api/dao/redis"
 )
 
@@ -22,54 +23,40 @@ var (
 	v   = viper.New()
 	env = flag.String("env", "local", "config file name")
 	//graceful = flag.Bool("graceful", false, "listen on fd open 3 (internal use only)")
-
 	confidant = "./../config"
-
 	// BuildID is compile-time variable
 	BuildID = "0"
 )
 
 func readConfig(fileName, filePath string) {
-
 	v.SetConfigName(fileName)
 	v.AddConfigPath(filePath)
-
-	// 找到并读取配置文件并且 处理错误读取配置文件
 	if err := v.ReadInConfig(); err != nil {
 		panic(err)
 	}
-
 	if err := conf.Init(v); err != nil {
 		panic(err)
 	}
 }
-
 func main() {
-
 	flag.Parse()
-	// 如果env使用的是绝对路径，则configpath为路径，env为文件名
 	if filepath.IsAbs(*env) {
 		confidant, *env = filepath.Split(*env)
 	}
 	//config init
 	readConfig(*env, confidant)
-
-	// 初始化基础组件
 	dao.InitComponent()
-
-	// 加载依赖组件
 	// http
 	httpserver.Init()
 	//redis
-	redis.Init()
-	//mysql
-	mysql.Init()
+	redis.Init("base")
+	//init service
+	_ = service.InitService()
+
 	// start server
 	//gin.SetMode(gin.ReleaseMode)
-	// Creates a router without any middleware by default
 	r := gin.New()
 	// Global middleware
-	// Recovery middleware
 	r.Use(middleware.CustomRecovery)
 	//instrument api count
 	r.Use(middleware.Instrument) // defer
@@ -77,8 +64,6 @@ func main() {
 	r.Use(middleware.Trace)
 	//access log
 	r.Use(middleware.AccessLogging) //defer
-
-	// 初始化api依赖的各个模块
 	if err := controller.Init(r); err != nil {
 		panic(err)
 	}
@@ -88,7 +73,6 @@ func main() {
 	if srv.InnerHTTP.Addr != "" {
 		go InnerServer(srv.InnerHTTP)
 	}
-
 	err := r.Run(srv.HTTP.Addr)
 	if err != nil {
 		fmt.Printf("err:%s", err.Error())

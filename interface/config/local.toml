@@ -37,7 +37,7 @@ file_path = "/data/logs/trace/trace_redis.log"
 [[redis]]
 name = "base"
 addr = "127.0.0.1:6379"
-pwd = "123456"
+pwd = ""
 db = 0
 dial_timeout = 0.5
 read_timeout = 0.25
@@ -84,14 +84,14 @@ timeout = 0.3
 name = "base"
 [mysql.master]
 driver = "mysql"
-dsn = "root:123456@tcp(127.0.0.1:3306)/redis?charset=utf8mb4&parseTime=True&loc=Local"
+dsn = "user:123456@tcp(127.0.0.1:3306)/samplebook?charset=utf8mb4&parseTime=True&loc=Local"
 max_open_conns = 20
 max_idle_conns = 10
 max_life_conns = 60
 
 [mysql.slave]
 driver = "mysql"
-dsn = "root:123456@tcp(127.0.0.1:3306)/redis?charset=utf8mb4&parseTime=True&loc=Local"
+dsn = "user:123456@tcp(127.0.0.1:3306)/samplebook?charset=utf8mb4&parseTime=True&loc=Local"
 max_open_conns = 20
 max_idle_conns = 10
 max_life_conns = 60

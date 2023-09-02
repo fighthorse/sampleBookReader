@@ -10,15 +10,23 @@ var (
 	Others = map[string]*trace_redis.RedisInstance{}
 )
 
-var (
-	BaseRedis = &trace_redis.RedisInstance{}
-)
+func Init(names ...string) {
+	for _, v := range names {
+		Others[v] = LoadOthersNew(v)
+	}
+}
 
-func Init() {
-	BaseRedis = LoadOthersNew("base")
+func GetClientByName(name string) *trace_redis.RedisInstance {
+	if l, ok := Others[name]; ok {
+		return l
+	}
+	return nil
 }
 
 func LoadOthersNew(name string) *trace_redis.RedisInstance {
+	if name == "" {
+		return nil
+	}
 	cfg := &trace_redis.RedisInstance{}
 	cfg.Name = name
 	cfg.Client = trace_redis.NewClient(cfg.Name)

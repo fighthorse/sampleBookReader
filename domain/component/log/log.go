@@ -10,7 +10,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fighthorse/sampleBookReader/interface/api/conf"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/diode"
 )
@@ -28,20 +27,20 @@ var (
 	SrvLogger = &srvlogger{}
 )
 
-func Init() {
+func Init(cc ConfigLog) {
 
-	if conf.GConfig.Log.LogType != "file" {
-		if conf.GConfig.Log.App.Enable {
+	if cc.LogType != "file" {
+		if cc.App.Enable {
 			SrvLogger.appLogger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 		}
-		if conf.GConfig.Log.Access.Enable {
+		if cc.Access.Enable {
 			SrvLogger.accessLogger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 		}
 		return
 	}
-	if conf.GConfig.Log.App.Enable {
+	if cc.App.Enable {
 		// 初始化业务日志
-		fileName := conf.GConfig.Log.App.FilePath
+		fileName := cc.App.FilePath
 		fmt.Println("AppLogPath:" + fileName)
 		err := os.MkdirAll(path.Dir(fileName), 0777)
 		if err != nil {
@@ -59,13 +58,13 @@ func Init() {
 		})
 
 		// level
-		l := parseLevel(conf.GConfig.Log.App.Level)
+		l := parseLevel(cc.App.Level)
 		SrvLogger.appLogger = zerolog.New(w).Level(l).With().Timestamp().Logger()
 	}
 
-	if conf.GConfig.Log.Access.Enable {
+	if cc.Access.Enable {
 		// 初始化访问日志
-		fileName := conf.GConfig.Log.Access.FilePath
+		fileName := cc.Access.FilePath
 		fmt.Println("AppAccessLogPath:" + fileName)
 		err := os.MkdirAll(path.Dir(fileName), 0777)
 		if err != nil {

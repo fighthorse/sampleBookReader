@@ -1,7 +1,6 @@
 package httpclient
 
 import (
-	"github.com/fighthorse/sampleBookReader/interface/api/conf"
 	"github.com/mitchellh/mapstructure"
 	"github.com/prometheus/client_golang/prometheus"
 )
@@ -37,10 +36,6 @@ func init() {
 	prometheus.MustRegister(remoteCallRequestCount)
 	prometheus.MustRegister(remoteCallCodeErrorCount)
 	prometheus.MustRegister(httpGobreakGauge)
-}
-
-func Init(cfg conf.HttpServer) {
-	InitSelfService(cfg.SelfServiceName, cfg.CloseBreaker)
 }
 
 // InitSelfService

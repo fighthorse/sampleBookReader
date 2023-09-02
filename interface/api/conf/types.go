@@ -50,33 +50,6 @@ type Trace struct {
 	Sampling    float64 `mapstructure:"sampling"`
 }
 
-type Redis struct {
-	Name         string  `mapstructure:"name"`
-	Addr         string  `mapstructure:"addr"`
-	Pwd          string  `mapstructure:"pwd"`
-	Db           float64 `mapstructure:"db"`
-	DialTimeout  float64 `mapstructure:"dial_timeout"`
-	ReadTimeout  float64 `mapstructure:"read_timeout"`
-	WriteTimeout float64 `mapstructure:"write_timeout"`
-	PoolSize     float64 `mapstructure:"pool_size"`
-	MinIdleConns float64 `mapstructure:"min_idle_conns"`
-	MaxRetries   float64 `mapstructure:"max_retries"`
-}
-
-type Mysql struct {
-	Name   string      `mapstructure:"name"`
-	Master MysqlConfig `mapstructure:"master"`
-	Slave  MysqlConfig `mapstructure:"slave"`
-}
-
-type MysqlConfig struct {
-	Driver         string  `mapstructure:"driver"`
-	DSN            string  `mapstructure:"dsn"`
-	MaxOpenConns   int32   `mapstructure:"max_open_conns"`
-	MaxIdleConns   int32   `mapstructure:"max_idle_conns"`
-	MaxLifeTimeout float64 `mapstructure:"max_life_timeout"`
-}
-
 type Kv struct {
 	Url       string `mapstructure:"url"`
 	KeyPerfix string `mapstructure:"key_perfix"`

@@ -2,14 +2,13 @@ package login
 
 import (
 	"errors"
+	"github.com/fighthorse/sampleBookReader/interface/api/service"
 	"time"
 
-	"github.com/fighthorse/sampleBookReader/domain/component/gocache"
 	"github.com/fighthorse/sampleBookReader/domain/component/gotoken"
 	"github.com/fighthorse/sampleBookReader/domain/component/log"
 	"github.com/fighthorse/sampleBookReader/domain/component/self_errors"
 	"github.com/fighthorse/sampleBookReader/interface/api/protos"
-	"github.com/fighthorse/sampleBookReader/interface/api/service/login"
 	"github.com/gin-gonic/gin"
 )
 
@@ -26,13 +25,13 @@ func loginOutEndpoint(c *gin.Context) {
 		return
 	}
 	// uid  缓存数据
-	data, ok := gocache.Get(uid)
+	data, ok := service.LoginService.LocalCache.Get(uid)
 	// 不存在
 	if !ok {
 		c.JSON(200, gin.H{"code": -126, "message": "token无效", "data": map[string]interface{}{}})
 		return
 	}
-	gocache.Del(uid)
+	service.LoginService.LocalCache.Delete(uid)
 	log.Info(c.Request.Context(), "loginOutEndpoint", log.Fields{"data": data})
 	c.JSON(200, gin.H{"code": 0, "message": "ok", "data": map[string]interface{}{}})
 }
@@ -50,7 +49,7 @@ func submitEndpoint(c *gin.Context) {
 		return
 	}
 	//verify pwd
-	_, err := login.VerifyUser(c, person.Name, person.Pwd)
+	_, err := service.LoginService.VerifyUser(c, person.Name, person.Pwd)
 	if err != nil {
 		c.JSON(200, gin.H{"code": -1, "message": "" + err.Error(), "data": map[string]interface{}{}})
 		return
@@ -69,7 +68,7 @@ func submitEndpoint(c *gin.Context) {
 		Token:   token,
 		Expires: day,
 	}
-	gocache.Set(person.Name, data, 24*time.Hour)
+	service.LoginService.LocalCache.Set(person.Name, data, 24*time.Hour)
 	log.Info(c.Request.Context(), "submitEndpoint", log.Fields{"person": person, "data": data})
 	c.JSON(200, gin.H{"code": 0, "message": "ok", "data": map[string]interface{}{
 		"token": token, "exp": day,
@@ -82,7 +81,7 @@ func checkEndpoint(c *gin.Context) {
 		c.JSON(200, gin.H{"code": -126, "message": "token参数无效", "data": map[string]interface{}{}})
 		return
 	}
-	data, err := login.Check(c, token.Token)
+	data, err := service.LoginService.Check(c, token.Token)
 	if err != nil {
 		c.JSON(200, gin.H{"code": -126, "message": err.Error(), "data": map[string]interface{}{}})
 		return

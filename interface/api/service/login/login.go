@@ -3,14 +3,20 @@ package login
 import (
 	"errors"
 
-	"github.com/fighthorse/sampleBookReader/domain/component/gocache"
 	"github.com/fighthorse/sampleBookReader/domain/component/gotoken"
 	"github.com/fighthorse/sampleBookReader/interface/api/conf"
 	"github.com/fighthorse/sampleBookReader/interface/api/protos"
 	"github.com/gin-gonic/gin"
 )
 
-func VerifyUser(c *gin.Context, userName, pwd string) (bool, error) {
+func (s *Service) VerifyUser(c *gin.Context, userName, pwd string) (bool, error) {
+	// userName lock
+
+	// 从数据库加载数据
+
+	// 验证密码
+
+	//
 	cfgList := conf.GConfig.LoginUser
 	for _, v := range cfgList {
 		if v.UserName == userName {
@@ -23,14 +29,14 @@ func VerifyUser(c *gin.Context, userName, pwd string) (bool, error) {
 	return false, errors.New("账户不存在")
 }
 
-func Check(c *gin.Context, token string) (*protos.Person, error) {
+func (s *Service) Check(c *gin.Context, token string) (*protos.Person, error) {
 	// token 解析 jwt name
 	uid, err := gotoken.ParseToken(token, gotoken.LoginSecret)
 	if err != nil {
 		return nil, errors.New("token无效:" + err.Error())
 	}
 	// uid  缓存数据
-	data, ok := gocache.Get(uid)
+	data, ok := s.LocalCache.Get(uid)
 	// 不存在
 	if !ok {
 		return nil, errors.New("token无效-未查询到信息")

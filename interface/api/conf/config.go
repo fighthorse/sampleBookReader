@@ -2,6 +2,9 @@ package conf
 
 import (
 	"fmt"
+	"github.com/fighthorse/sampleBookReader/domain/component/db"
+	"github.com/fighthorse/sampleBookReader/domain/component/log"
+	"github.com/fighthorse/sampleBookReader/domain/component/trace_redis"
 
 	"github.com/spf13/viper"
 )
@@ -15,15 +18,15 @@ type Config struct {
 	Commandline Commandline              `mapstructure:"commandline"`
 	Bootstrap   Bootstrap                `mapstructure:"bootstrap"`
 	Transport   Transport                `mapstructure:"transport"`
-	Log         Log                      `mapstructure:"log"`
+	Log         log.ConfigLog            `mapstructure:"log"`
 	Trace       Trace                    `mapstructure:"trace"`
 	HttpServer  HttpServer               `mapstructure:"http_server"`
 	HttpBreaker []map[string]interface{} `mapstructure:"http_breaker"`
 	ChildServer []map[string]interface{} `mapstructure:"child_server"`
-	Redis       []Redis                  `mapstructure:"redis"`
+	Redis       []trace_redis.Redis      `mapstructure:"redis"`
 	Server      []Server                 `mapstructure:"server"`
 	Nsq         Nsq                      `mapstructure:"nsq"`
-	Mysql       []Mysql                  `mapstructure:"mysql"`
+	Mysql       []db.Mysql               `mapstructure:"mysql"`
 	OSS         OSS                      `mapstructure:"oss"`
 	LoginUser   []LoginUser              `mapstructure:"login_user"`
 	LocalConfig LocalConfig              `mapstructure:"config"`

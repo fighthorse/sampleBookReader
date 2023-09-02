@@ -3,8 +3,6 @@ package trace_redis
 import (
 	"fmt"
 	"runtime"
-
-	"github.com/fighthorse/sampleBookReader/interface/api/conf"
 )
 
 // Global redis manager
@@ -80,7 +78,7 @@ func (c *Config) FillWithDefaults() {
 // A ManagerConfig defines a list of redis config with its name
 type ManagerConfig map[string]*Config
 
-func convertToConfig(c conf.Redis) *Config {
+func convertToConfig(c Redis) *Config {
 	ret := &Config{}
 	fn := func(s float64) int {
 		return int(s * 1000)
@@ -97,7 +95,7 @@ func convertToConfig(c conf.Redis) *Config {
 	return ret
 }
 
-func InitCfg(cfg []conf.Redis) {
+func InitCfg(cfg []Redis) {
 	if cfg == nil || len(cfg) <= 0 {
 		return
 	}
@@ -108,7 +106,7 @@ func InitCfg(cfg []conf.Redis) {
 	RedisMgr = NewManager(&marooning)
 }
 
-func AddCfg(v conf.Redis) {
+func AddCfg(v Redis) {
 	c := convertToConfig(v)
 	marooning[v.Name] = c
 	RedisMgr = NewManager(&marooning)
