@@ -10,12 +10,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/go-redis/redis"
-	"github.com/google/gops/agent"
-	"github.com/fighthorse/sampleBookReader/captcha"
-	"github.com/fighthorse/sampleBookReader/captcha/store"
+	"github.com/fighthorse/captcha"
+	"github.com/fighthorse/captcha/store"
 	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
 	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger"
+	"github.com/go-redis/redis"
+	"github.com/google/gops/agent"
 
 	_ "github.com/fighthorse/sampleBookReader/gin-admin/internal/app/swagger"
 )

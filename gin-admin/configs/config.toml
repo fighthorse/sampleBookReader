@@ -5,7 +5,7 @@ RunMode = "debug"
 WWW = ""
 
 # 是否启用swagger
-Swagger = true
+Swagger = false
 
 # 启动时是否打印配置参数
 PrintConfig = true
@@ -36,7 +36,7 @@ Data = ""
 # 是否启用casbin
 Enable = true
 # debug模式
-Debug = false
+Debug = true
 # 模型配置文件(也可以启动服务时使用-m指定)
 Model = ""
 # 是否启用定期自动加载策略
@@ -70,7 +70,7 @@ RotationTime = 24
 
 [LogGormHook]
 # 数据库类型(目前支持的数据库类型：mysql/sqlite3/postgres)
-DBType = "sqlite3"
+DBType = "mysql"
 # 设置连接可以重用的最长时间(单位：秒)
 MaxLifetime = 7200
 # 设置数据库的最大打开连接数
@@ -93,7 +93,7 @@ UserID = 9
 # 登录用户名
 UserName = "root"
 # 登录密码
-Password = "abc-123"
+Password = "abc123"
 # 显示名称
 RealName = "Admin"
 
@@ -114,17 +114,17 @@ SigningKey = "gin-admin"
 # 过期时间（单位秒）
 Expired = 7200
 # 存储(支持：file/redis)
-Store = "file"
+Store = "redis"
 # 文件路径
 FilePath = "data/jwt_auth.db"
 # redis 数据库(如果存储方式是redis，则指定存储的数据库)
-RedisDB = 10
+RedisDB = 1
 # 存储到 redis 数据库中的键名前缀
 RedisPrefix = "auth_"
 
 [Captcha]
 # 存储方式(支持：memory/redis)
-Store = "memory"
+Store = "redis"
 # 数字长度
 Length = 4
 # 图片宽度
@@ -132,7 +132,7 @@ Width = 400
 # 图片高度
 Height = 160
 # redis数据库(如果存储方式是redis，则指定存储的数据库)
-RedisDB = 10
+RedisDB = 1
 # 存储到redis数据库中的键名前缀
 RedisPrefix = "captcha_"
 
@@ -147,7 +147,7 @@ RedisDB = 10
 
 [CORS]
 # 是否启用
-Enable = false
+Enable = true
 # 允许跨域请求的域名列表(*表示全部允许)
 AllowOrigins = ["*"]
 # 允许跨域请求的请求方式列表
@@ -171,7 +171,7 @@ ExcludedPaths = []
 # 是否开启调试模式
 Debug = true
 # 数据库类型(目前支持的数据库类型：mysql/sqlite3/postgres)
-DBType = "sqlite3"
+DBType = "mysql"
 # 设置连接可以重用的最长时间(单位：秒)
 MaxLifetime = 7200
 # 设置数据库的最大打开连接数
@@ -179,7 +179,7 @@ MaxOpenConns = 150
 # 设置空闲连接池中的最大连接数
 MaxIdleConns = 50
 # 数据库表名前缀
-TablePrefix = "g_"
+TablePrefix = ""
 # 是否启用自动映射数据库表结构
 EnableAutoMigrate = true
 
@@ -193,7 +193,7 @@ User = "root"
 # 密码
 Password = "123456"
 # 数据库
-DBName = "gin-admin"
+DBName = "samplebook"
 # 连接参数
 Parameters = "charset=utf8mb4&parseTime=True&loc=Local&allowNativePasswords=true"
 
