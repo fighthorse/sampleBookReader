@@ -5,10 +5,10 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/logger"
-	loggerhook "github.com/sampleBookReader/gin-admin/v8/pkg/logger/hook"
-	loggergormhook "github.com/sampleBookReader/gin-admin/v8/pkg/logger/hook/gorm"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger"
+	loggerhook "github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger/hook"
+	loggergormhook "github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger/hook/gorm"
 
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 )

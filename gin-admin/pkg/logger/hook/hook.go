@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/sampleBookReader/queue"
+	"github.com/fighthorse/sampleBookReader/queue"
 	"github.com/sirupsen/logrus"
 )
 

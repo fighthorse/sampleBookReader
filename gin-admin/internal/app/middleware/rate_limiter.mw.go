@@ -5,13 +5,13 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/contextx"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/ginx"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/errors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
 	"github.com/go-redis/redis_rate"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/contextx"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/ginx"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/errors"
 	"golang.org/x/time/rate"
 )
 

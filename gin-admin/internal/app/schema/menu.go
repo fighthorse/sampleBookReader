@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/json"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/json"
 )
 
 // Menu 菜单对象

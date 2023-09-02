@@ -3,11 +3,11 @@ package app
 import (
 	jwt "github.com/dgrijalva/jwt-go"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/auth"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/auth/jwtauth"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/auth/jwtauth/store/buntdb"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/auth/jwtauth/store/redis"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/auth"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/auth/jwtauth"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/auth/jwtauth/store/buntdb"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/auth/jwtauth/store/redis"
 )
 
 func InitAuth() (auth.Auther, func(), error) {

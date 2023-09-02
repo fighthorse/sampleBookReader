@@ -9,10 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/errors"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/logger"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/json"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/errors"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/json"
 )
 
 const (

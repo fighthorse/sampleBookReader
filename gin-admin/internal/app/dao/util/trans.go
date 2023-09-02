@@ -3,8 +3,8 @@ package util
 import (
 	"context"
 
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/contextx"
 	"github.com/google/wire"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/contextx"
 	"gorm.io/gorm"
 )
 

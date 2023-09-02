@@ -14,8 +14,8 @@ import (
 	"context"
 	"os"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/logger"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger"
 )
 
 // Usage: go build -ldflags "-X main.VERSION=x.x.x"

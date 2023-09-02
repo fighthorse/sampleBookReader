@@ -6,9 +6,9 @@ import (
 	"github.com/google/wire"
 	"gorm.io/gorm"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/util"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/errors"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/util"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/errors"
 )
 
 var MenuActionSet = wire.NewSet(wire.Struct(new(MenuActionRepo), "*"))

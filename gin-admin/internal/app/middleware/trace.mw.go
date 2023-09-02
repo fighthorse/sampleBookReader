@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/contextx"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/logger"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/trace"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/contextx"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/trace"
 )
 
 // Get or set trace_id in request context

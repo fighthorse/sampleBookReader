@@ -7,12 +7,12 @@ import (
 
 	"github.com/google/wire"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/contextx"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/errors"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/snowflake"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/yaml"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/contextx"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/errors"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/snowflake"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/yaml"
 )
 
 var MenuSet = wire.NewSet(wire.Struct(new(MenuSrv), "*"))

@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/ginx"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/errors"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/ginx"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/errors"
 )
 
 func NoMethodHandler() gin.HandlerFunc {

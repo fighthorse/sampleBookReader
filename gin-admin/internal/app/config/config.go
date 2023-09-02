@@ -8,7 +8,7 @@ import (
 
 	"github.com/koding/multiconfig"
 
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/json"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/json"
 )
 
 var (

@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 
-	"github.com/sampleBookReader/gin-admin/v8/pkg/logger"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger"
 )
 
 // Create logger hook from gorm

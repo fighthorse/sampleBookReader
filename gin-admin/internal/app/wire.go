@@ -8,11 +8,11 @@ package app
 import (
 	"github.com/google/wire"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/api"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/module/adapter"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/router"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/service"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/api"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/module/adapter"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/router"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/service"
 )
 
 func BuildInjector() (*Injector, func(), error) {

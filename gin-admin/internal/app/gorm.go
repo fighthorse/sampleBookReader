@@ -7,9 +7,9 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/gormx"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/gormx"
 )
 
 func InitGormDB() (*gorm.DB, func(), error) {

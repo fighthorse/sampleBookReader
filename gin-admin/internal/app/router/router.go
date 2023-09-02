@@ -5,9 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/api"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/middleware"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/auth"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/api"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/middleware"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/auth"
 )
 
 var _ IRouter = (*Router)(nil)

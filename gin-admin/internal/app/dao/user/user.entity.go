@@ -5,9 +5,9 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/util"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/structure"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/util"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/structure"
 )
 
 func GetUserDB(ctx context.Context, defDB *gorm.DB) *gorm.DB {

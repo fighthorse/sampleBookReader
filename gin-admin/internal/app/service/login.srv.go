@@ -5,14 +5,14 @@ import (
 	"net/http"
 	"sort"
 
+	"github.com/fighthorse/sampleBookReader/captcha"
 	"github.com/google/wire"
-	"github.com/sampleBookReader/captcha"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/auth"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/errors"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/hash"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/auth"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/errors"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/hash"
 )
 
 var LoginSet = wire.NewSet(wire.Struct(new(LoginSrv), "*"))

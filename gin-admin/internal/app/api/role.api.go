@@ -4,10 +4,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/contextx"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/ginx"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/service"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/contextx"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/ginx"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/service"
 )
 
 var RoleSet = wire.NewSet(wire.Struct(new(RoleAPI), "*"))

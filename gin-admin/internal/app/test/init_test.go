@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
 	"github.com/gin-gonic/gin"
 )
 

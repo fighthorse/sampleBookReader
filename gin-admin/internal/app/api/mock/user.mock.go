@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
 
-	_ "github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
+	_ "github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
 )
 
 var UserSet = wire.NewSet(wire.Struct(new(UserMock), "*"))

@@ -12,12 +12,12 @@ import (
 
 	"github.com/go-redis/redis"
 	"github.com/google/gops/agent"
-	"github.com/sampleBookReader/captcha"
-	"github.com/sampleBookReader/captcha/store"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/logger"
+	"github.com/fighthorse/sampleBookReader/captcha"
+	"github.com/fighthorse/sampleBookReader/captcha/store"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger"
 
-	_ "github.com/sampleBookReader/gin-admin/v8/internal/app/swagger"
+	_ "github.com/fighthorse/sampleBookReader/gin-admin/internal/app/swagger"
 )
 
 type options struct {

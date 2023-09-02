@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/hash"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/json"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/structure"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/hash"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/json"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/structure"
 )
 
 // GetRootUser 获取root用户

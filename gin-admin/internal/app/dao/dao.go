@@ -6,11 +6,11 @@ import (
 	"github.com/google/wire"
 	"gorm.io/gorm"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/menu"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/role"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/user"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/util"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/menu"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/role"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/user"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/util"
 ) // end
 
 // RepoSet repo injection

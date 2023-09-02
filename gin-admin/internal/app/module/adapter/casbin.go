@@ -8,9 +8,9 @@ import (
 	"github.com/casbin/casbin/v2/persist"
 	"github.com/google/wire"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/logger"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/logger"
 )
 
 var _ persist.Adapter = (*CasbinAdapter)(nil)

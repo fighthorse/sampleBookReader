@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
 )
 
 func CORSMiddleware() gin.HandlerFunc {

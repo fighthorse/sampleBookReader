@@ -7,10 +7,10 @@ import (
 	"github.com/casbin/casbin/v2"
 	"github.com/google/wire"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/schema"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/errors"
-	"github.com/sampleBookReader/gin-admin/v8/pkg/util/snowflake"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/schema"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/errors"
+	"github.com/fighthorse/sampleBookReader/gin-admin/pkg/util/snowflake"
 )
 
 var RoleSet = wire.NewSet(wire.Struct(new(RoleSrv), "*"))

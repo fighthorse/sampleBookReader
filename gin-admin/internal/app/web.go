@@ -2,13 +2,13 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sampleBookReader/gzip"
+	"github.com/fighthorse/sampleBookReader/gzip"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	swaggerFiles "github.com/swaggo/gin-swagger/swaggerFiles"
 
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/config"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/middleware"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/router"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/config"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/middleware"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/router"
 )
 
 func InitGinEngine(r router.IRouter) *gin.Engine {

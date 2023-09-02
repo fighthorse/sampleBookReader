@@ -7,18 +7,18 @@
 package app
 
 import (
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/api"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/menu"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/role"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/user"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/dao/util"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/module/adapter"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/router"
-	"github.com/sampleBookReader/gin-admin/v8/internal/app/service"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/api"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/menu"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/role"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/user"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/dao/util"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/module/adapter"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/router"
+	"github.com/fighthorse/sampleBookReader/gin-admin/internal/app/service"
 )
 
 import (
-	_ "github.com/sampleBookReader/gin-admin/v8/internal/app/swagger"
+	_ "github.com/fighthorse/sampleBookReader/gin-admin/internal/app/swagger"
 )
 
 // Injectors from wire.go:
