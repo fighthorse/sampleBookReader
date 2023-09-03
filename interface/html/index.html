@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小说系统</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/html/bootstrap-3.4.1-dist/css/bootstrap.min.css" >
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/html/bootstrap-3.4.1-dist/css/css/bootstrap-theme.min.css">
+
+    <style>
+        .carousel-inner > .item > img {
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+
+    <script src="/html/bootstrap-3.4.1-dist/js/jq3.6.0.js" ></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/html/bootstrap-3.4.1-dist/js/bootstrap.min.js" ></script>
+</head>
+<body style="background-color: #f5f5f5;padding:50px;">
+<div class="header" style="margin-top: 20px;">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" ><strong style="font-size:18px;color: #0c85d0">小说系统</strong></li>
+                <li role="presentation" class="active"><a href="#">首页</a></li>
+                <li role="presentation"><a href="category.html">分类</a></li>
+                <li role="presentation" ><a href="shelf.html">书架</a></li>
+                <li role="presentation"><a href="reader.html">阅读记录</a></li>
+                <li role="presentation"><a href="feedback.html">反馈</a></li>
+
+                <li role="presentation" id="isLogin" >
+                    <a href="/html/sign-in.html" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    去登录</a></li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!-- 轮播 -->
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- 轮播指示器 -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+            </ol>
+
+            <!-- 轮播内容 -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="img/banner.jpeg" alt="Image 1">
+                    <div class="carousel-caption">
+                        <h3>精彩活动</h3>
+                        <p>浦东图书馆</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/html/img/img.png" alt="Image 2">
+                    <div class="carousel-caption">
+                        <h3>浦东图书馆</h3>
+                        <p>浦东图书馆</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/html/img/img_1.png" alt="Image 3">
+                    <div class="carousel-caption">
+                        <h3>传承书香</h3>
+                        <p>让文化继承</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/html/img/img_2.png" alt="Image 4">
+                    <div class="carousel-caption">
+                        <h3>凌云计划</h3>
+                        <p>招募更多的创作者</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 轮播控制按钮 -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">上一页</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">下一页</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<!-- 列表 -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <strong> 主编推荐 </strong>
+            </a>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="小说名称">
+                </div>
+                <button type="submit" class="btn btn-default">搜索小说</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="row text-center" style="padding: 20px;" id="book_list">
+    <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="jumbotron" style="padding: 20px;">
+            <h3>从前有座镇妖关</h3>
+            <p class="text-left"  style="font-size: 14px;">从前，有这样一座关。 从前，有这样一群人。 这座关，寸寸染血。 这些人，不死不还。 只为在尸山血海中，弥留之际，转身时，能见那身后闪烁的万家灯火，岁岁平安。</p>
+            <p class="text-left"  style="font-size: 16px;"></p>
+            <p class="text-right" style="padding-right: 20px;">
+                <a class="btn btn-info " href="read.html?book_id=1" role="button">去阅读</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="jumbotron" style="padding: 20px;">
+            <h3>西游记</h3>
+            <p class="text-left"  style="font-size: 14px;">孙悟空、猪八戒、沙和尚保护唐僧西天取经、历经九九八十一难的传奇历险故事。</p>
+            <p class="text-left"  style="font-size: 16px;" >作者： 千询 主角： 孙悟空</p>
+            <p class="text-right" style="padding-right: 20px;">
+                <a class="btn btn-info" href="read.html?book_id=1" role="button">去阅读</a></p>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="jumbotron" style="padding: 20px;">
+            <h3>稻草人</h3>
+            <p class="text-left"  style="font-size: 14px;">《稻草人》是新中国第一本为儿童而写的童话集，作者叶圣陶也是中国现代童话创作的拓荒者。他的童话构思新颖独特，描写细腻逼真，富于现实内容。叶圣陶的早期作品笔调抒情，风格唯美。</p>
+            <p class="text-left"  style="font-size: 16px;" >作者： 叶圣陶</p>
+            <p class="text-right" style="padding-right: 20px;">
+                <a class="btn btn-info" href="read.html?book_id=1" role="button">去阅读</a></p>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="jumbotron" style="padding: 20px;">
+            <h3>孩子，为你自己读书</h3>
+            <p class="text-left" style="font-size: 14px;">读书，是一件苦差事。大多数孩子都在抱怨，读书苦、读书累，甚至常常感到迷茫。其实，孩子有这种想法，大都是不明白为什么要读书，或者说认识不到读书的重要性。在这种状态下，孩子产生厌学、叛逆的行为，从而让老师和家长头疼不已。</p>
+            <p class="text-left" style="font-size: 16px;" >作者： 徐可夫编著</p>
+            <p class="text-right" style="padding-right: 20px;">
+                <a class="btn btn-info" href="read.html?book_id=1" role="button">去阅读</a></p>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="jumbotron" style="padding: 20px;">
+            <h3>稻草人</h3>
+            <p style="font-size: 14px;">《稻草人》是新中国第一本为儿童而写的童话集，作者叶圣陶也是中国现代童话创作的拓荒者。他的童话构思新颖独特，描写细腻逼真，富于现实内容。叶圣陶的早期作品笔调抒情，风格唯美。</p>
+            <p style="font-size: 16px;" >作者： 叶圣陶</p>
+            <p class="text-right" style="padding-right: 20px;">
+                <a class="btn btn-info" href="read.html?book_id=1" role="button">去阅读</a></p>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+</div>
+<div class="row">
+</div>
+<div class="row">
+    <footer style="padding-top: 50px;
+        padding-bottom: 50px;
+        margin-top: 100px;
+        color: #99979c;
+        text-align: center;
+        background-color: #2a2730;display: block">
+        <div class="container">
+            <ul class="bs-docs-footer-links">
+                <li><a href="/about/">github源码</a></li>
+                <li><a href="/html/feedback.html">反馈</a></li>
+            </ul>
+
+            <p>@Copyright. fighthorse </p>
+
+        </div>
+    </footer>
+</div>
+
+<script type="application/javascript">
+
+    $(document).ready(function() {
+        $('#myCarousel').carousel({
+            interval:4000
+        });
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小说网站</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/html/bootstrap-3.4.1-dist/css/bootstrap.min.css" >
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/html/bootstrap-3.4.1-dist/css/css/bootstrap-theme.min.css">
+
+    <style>
+        .login-contan {
+            background-image: url("./img/login.jpg");
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .login-form {
+            background-color: #fff;
+            padding: 20px;
+            width: 300px;
+        }
+    </style>
+
+    <script src="/html/bootstrap-3.4.1-dist/js/jq3.6.0.js" ></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/html/bootstrap-3.4.1-dist/js/bootstrap.min.js" ></script>
+</head>
+<body style="background-color: #f5f5f5;padding:50px;">
+
+<div class="header" style="margin-top: 20px;">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" ><strong style="font-size:18px;color: #0c85d0">小说系统</strong></li>
+                <li role="presentation" ><a href="index.html">首页</a></li>
+                <li role="presentation"><a href="category.html">分类</a></li>
+                <li role="presentation" ><a href="shelf.html">书架</a></li>
+                <li role="presentation" class="active"><a href="reader.html">阅读记录</a></li>
+                <li role="presentation"><a href="feedback.html">反馈</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="row text-center " id="nologin" style="padding: 20px;">
+    <img src="img/shelf.png">
+    <h4>登录账号，同步在浏览记录</h4>
+    <a class="btn btn-danger" href="sign-in.html">去登录账户</a>
+</div>
+<div class="row" style="padding: 30px;">
+    <div class="row" style="padding: 30px;">
+        <h3>浏览记录</h3>
+    </div>
+    <div class="row" style="padding: 30px;">
+        <div class="media col-xs-6 col-sm-6 col-md-6">
+            <div class="media-left">
+                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">
+            </div>
+            <div class="media-body" style="padding: 5px;">
+                <h4 class="media-heading">每天懂一点人情世故</h4>
+                这本书并不是教你违心、虚伪、奸诈地迎合别人，钻空子，占便宜，而是告诉年轻人在处世方面，在善良、真诚、宽容的基础上，做事掌握分寸，谨言慎行，礼行天下，智慧灵活地待人接物。如果能做到这些，我们会少很多烦恼，对自己的生活和工作必定会有所帮助！
+                <p class="text-right">
+                    <a class="btn btn-info" href="read.html?book_id=3">继续阅读</a>
+                </p>
+            </div>
+        </div>
+        <div class="media col-xs-6 col-sm-6 col-md-6">
+            <div class="media-left">
+                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">
+            </div>
+            <div class="media-body" style="padding: 5px;">
+                <h4 class="media-heading">每天懂一点人情世故</h4>
+                这本书并不是教你违心、虚伪、奸诈地迎合别人，钻空子，占便宜，而是告诉年轻人在处世方面，在善良、真诚、宽容的基础上，做事掌握分寸，谨言慎行，礼行天下，智慧灵活地待人接物。如果能做到这些，我们会少很多烦恼，对自己的生活和工作必定会有所帮助！
+                <p class="text-right">
+                    <a class="btn btn-info" href="read.html?book_id=3">继续阅读</a>
+                </p>
+            </div>
+        </div>
+        <div class="media col-xs-6 col-sm-6 col-md-5">
+            <div class="media-left">
+                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">
+            </div>
+            <div class="media-body" style="padding: 5px;">
+                <h4 class="media-heading">每天懂一点人情世故</h4>
+                这本书并不是教你违心、虚伪、奸诈地迎合别人，钻空子，占便宜，而是告诉年轻人在处世方面，在善良、真诚、宽容的基础上，做事掌握分寸，谨言慎行，礼行天下，智慧灵活地待人接物。如果能做到这些，我们会少很多烦恼，对自己的生活和工作必定会有所帮助！
+                <p class="text-right">
+                    <a class="btn btn-info" href="read.html?book_id=3">继续阅读</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+</div>
+<div class="row">
+    <footer style="padding-top: 50px;
+        padding-bottom: 50px;
+        margin-top: 100px;
+        color: #99979c;
+        text-align: center;
+        background-color: #2a2730;display: block">
+        <div class="container">
+            <ul class="bs-docs-footer-links">
+                <li><a href="/about/">github源码</a></li>
+                <li><a href="/html/feedback.html">反馈</a></li>
+            </ul>
+
+            <p>@Copyright. fighthorse </p>
+
+        </div>
+    </footer>
+</div>
+
+<script type="application/javascript">
+
+
+</script>
+</body>
+</html>

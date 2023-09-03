@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小说网站</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/html/bootstrap-3.4.1-dist/css/bootstrap.min.css" >
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/html/bootstrap-3.4.1-dist/css/css/bootstrap-theme.min.css">
+    <style>
+        .list-new {
+            max-width: 250px;
+            margin-left: 10px;
+        }
+    </style>
+    <script src="/html/bootstrap-3.4.1-dist/js/jq3.6.0.js" ></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/html/bootstrap-3.4.1-dist/js/bootstrap.min.js" ></script>
+</head>
+<body style="background-color: #f5f5f5;padding:50px;">
+
+<div class="header" style="margin-top: 20px;">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" ><strong style="font-size:18px;color: #0c85d0">小说系统</strong></li>
+                <li role="presentation" ><a href="index.html">首页</a></li>
+                <li role="presentation" class="active"><a href="category.html">分类</a></li>
+                <li role="presentation" ><a href="shelf.html">书架</a></li>
+                <li role="presentation"><a href="reader.html">阅读记录</a></li>
+                <li role="presentation"><a href="feedback.html">反馈</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+<div class="row" style="padding-left: 3px;margin-left: 10px;">
+    <div class="row" style="padding: 10px;">
+        <h3>分类列表</h3>
+    </div>
+    <div class="row" style="padding: 5px;">
+            <ul id="category-list"  style="display: flex;">
+                <li class="list-group-item list-new" >玄幻</li>
+                <li class="list-group-item list-new">修真</li>
+                <li class="list-group-item list-new">都市</li>
+                <li class="list-group-item list-new">历史</li>
+            </ul>
+    </div>
+    <div class="row" style="padding: 30px;">
+        <div id="book-list" class="col-xs-10 col-sm-10 col-md-10">
+            <!-- 动态加载书籍 -->
+        </div>
+    </div>
+</div>
+<div class="row">
+</div>
+<div class="row">
+    <footer style="padding-top: 50px;
+        padding-bottom: 50px;
+        margin-top: 100px;
+        color: #99979c;
+        text-align: center;
+        background-color: #2a2730;display: block">
+        <div class="container">
+            <ul class="bs-docs-footer-links">
+                <li><a href="/about/">github源码</a></li>
+                <li><a href="feedback.html">反馈</a></li>
+            </ul>
+
+            <p>@Copyright. fighthorse </p>
+
+        </div>
+    </footer>
+</div>
+
+<script type="application/javascript">
+
+    $(document).ready(function() {
+
+        loadBooksByCategory("玄幻");
+
+        $(".list-group-item").click(function() {
+            // 获取所点击的分类
+            var category = $(this).text();
+
+            // 根据分类加载书籍列表
+            loadBooksByCategory(category);
+        });
+
+        function loadBooksByCategory(category) {
+            // 清空之前加载的书籍
+            $("#book-list").empty();
+
+            // 模拟异步加载书籍数据
+            setTimeout(function() {
+                // 根据分类获取书籍数据
+                var books = getBooksByCategory(category);
+
+                if (books.length > 0) {
+                    // 动态生成书籍列表
+                    $.each(books, function(index, book) {
+                        let str = "<div class='panel panel-default'><div class='panel-body'><h3>" +book.title +
+                            "</h3><p>" +book.author +
+                            "</p><p>" +book.description+
+                            "</p><p class='text-right'> 000 <a href='read.html?" + book.id + "'>去阅读</a></p></div></div>"
+                        console.log(str)
+                        $("#book-list").append(str)
+                    });
+                } else {
+                    $("#book-list").html("暂无该分类的书籍")
+                }
+            }, 500);
+        }
+
+        function getBooksByCategory(category) {
+            // 此处通过分类获取对应的书籍数据
+            // 模拟返回书籍数据
+            if (category === "玄幻") {
+                return [
+                    {
+                        id:"book_id=1",
+                        title: "诛仙",
+                        author: "萧鼎",
+                        description: "草根少年张小凡，机缘巧合，步入仙门，修行之路一波三折。"
+                    },
+                    {
+                        id:"book_id=2",
+                        title: "斗罗大陆",
+                        author: "唐家三少",
+                        description: "唐舞麟因为带着被人嫉恨的盘体中的神奇技能，为了能顺利的成长。"
+                    }
+                ];
+            } else if (category === "修真") {
+                return [
+                    {
+                        id:"book_id=3",
+                        title: "凡人修仙传",
+                        author: "忘语",
+                        description: "楚凡意外穿越到一个陌生的世界，成了山村的一个穷小子。"
+                    },
+                    {
+                        id:"book_id=4",
+                        title: "儒道至圣",
+                        author: "忘语",
+                        description: "被常人视为废物的孟辰，身怀古圣之残魂，看他如何逆天改命。"
+                    }
+                ];
+            } else if (category === "都市") {
+                return [
+                    {
+                        id:"book_id=5",
+                        title: "择天记",
+                        author: "猫腻",
+                        description: "上天入地的异能，超能力、瞬移、磁场、操控……无所不能."
+                    },
+                    {
+                        id:"book_id=6",
+                        title: "全职法师",
+                        author: "乱",
+                        description: "大学生罗晨，穿越到了一个类似中世纪的玄幻世界。"
+                    }
+                ];
+            } else if (category === "历史") {
+                return [
+                    {
+                        id:"book_id=7",
+                        title: "大明王朝1566",
+                        author: "黄易",
+                        description: "明朝的边缘人物石室彦，身上有个活佛的紫金神葫，从而表达出对道的敬仰。"
+                    },
+                    {
+                        id:"book_id=8",
+                        title: "明朝那些事儿",
+                        author: "当年明月",
+                        description: "风起四方，云布八方。徐之硕，国朝宰相，至尊章献皇后之孙。"
+                    }
+                ];
+            } else {
+                return [];
+            }
+        }
+    });
+</script>
+</body>
+</html>

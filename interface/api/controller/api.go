@@ -9,7 +9,10 @@ import (
 
 func Init(r *gin.Engine) error {
 	r.Static("/pages", "./../pages")
-	r.StaticFile("/favicon.ico", "./../pages/favicon.ico")
+	r.Static("/html", "./../html")
+	r.Static("/crucial", "./../crucial")
+	r.Static("/uploads", "./../../uploads")
+	r.StaticFile("/favicon.ico", "./../../uploads/favicon.ico")
 	r.GET("/", func(c *gin.Context) {
 		c.Request.URL.Path = "/pages"
 		r.HandleContext(c)
