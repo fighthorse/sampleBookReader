@@ -8,13 +8,11 @@ import (
 )
 
 func Init(r *gin.Engine) error {
-	r.Static("/pages", "./../pages")
 	r.Static("/html", "./../html")
-	r.Static("/crucial", "./../crucial")
 	r.Static("/uploads", "./../../uploads")
 	r.StaticFile("/favicon.ico", "./../../uploads/favicon.ico")
 	r.GET("/", func(c *gin.Context) {
-		c.Request.URL.Path = "/pages"
+		c.Request.URL.Path = "/html"
 		r.HandleContext(c)
 	})
 	hc.RegisterHttp(r)
