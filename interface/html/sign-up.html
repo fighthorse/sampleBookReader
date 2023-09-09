@@ -70,7 +70,7 @@
                     <input type="password" class="form-control" id="password2" placeholder="输入密码">
                 </div>
                 <p class="text-right"><a href="sign-in.html">有账户?去登录</a></p>
-                <button type="submit" class="btn btn-primary">注册账户</button>
+                <a  class="btn btn-primary" onclick="SubmitRegister()">注册账户</a>
             </form>
         </div>
     </div>
@@ -107,6 +107,46 @@
         },1000)
 
     });
+
+    function SubmitRegister(){
+        let username = $("#username").val()
+        if ( username === "" || username.length < 4 ){
+            layer.msg('请输入有效的用户名');
+            $("#username").focus()
+            return
+        }
+        let pwd = $("#password").val()
+        if ( pwd === "" || pwd.length < 4 ){
+            layer.msg('请输入有效的密码');
+            $("#password").focus()
+            return
+        }
+
+        //password2
+        let pwd2 = $("#password2").val()
+        if ( pwd2 === "" || pwd2.length < 4 ){
+            layer.msg('请输入有效的密码');
+            $("#password2").focus()
+            return
+        }
+
+        //Loading
+        var index = layer.load(0, {shade: false}); // 0代表加载的风格，支持0-2
+
+        $.post("/login/register", { "name": username,"pwd":pwd,"pwd2":pwd2, },
+            function(data){
+                layer.close(index);
+                console.log(data); //  2pm
+                if (data.code !== 0 ){
+                    layer.msg(data.code+":"+data.message);
+                    return
+                }
+                // 通过 localforage 完成同样功能
+                SetLoginHtml(data.data)
+                //回到首页
+                window.location.href = "/"
+            }, "json");
+    }
 
 </script>
 </body>

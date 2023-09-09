@@ -8,6 +8,7 @@ type TestHeader struct {
 type PersonLogin struct {
 	Name string `form:"name" json:"name"` //登录用户
 	Pwd  string `form:"pwd" json:"pwd"`   // 登录密钥
+	Pwd2 string `form:"pwd2" json:"pwd2"` // 登录密钥
 }
 
 type Person struct {

@@ -16,6 +16,7 @@ func RegisterHttp(r *gin.Engine) {
 	{
 		authorized.GET("/out", loginOutEndpoint)
 		authorized.POST("/submit", submitEndpoint)
+		authorized.POST("/register", registerEndpoint)
 		authorized.POST("/check", checkEndpoint)
 	}
 }

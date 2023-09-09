@@ -12,10 +12,19 @@ function IsLoginHtml() {
     // 回调版本：从仓库中获取 key 对应的值并将结果提供给回调函数。如果 key 不存在，getItem() 将返回 null。
     localforage.getItem('user_token', function(err, value) {
         // 当离线仓库中的值被载入时，此处代码运行
+        if ( value === undefined  || value === "" || value === null ){
+            localforage.clear()
+            _UserToken = ""
+            HeaderLoginPage()
+            return
+        }
+
         let res = JSON.parse(value)
         let now = getCurrentFormattedDateTime()
-        console.log(now , res.exp)
-        if (res.exp <= now ){
+        let exp =  res.exp ?? undefined
+
+        console.log(now ,exp)
+        if ( exp === undefined  || exp <= now ){
             localforage.clear()
             _UserToken = ""
             HeaderLoginPage()

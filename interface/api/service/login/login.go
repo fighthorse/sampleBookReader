@@ -3,12 +3,57 @@ package login
 import (
 	"errors"
 	"github.com/fighthorse/sampleBookReader/domain/component/gotoken"
+	"github.com/fighthorse/sampleBookReader/domain/models/model"
 	"github.com/fighthorse/sampleBookReader/domain/models/query"
 	"github.com/fighthorse/sampleBookReader/interface/api/conf"
 	"github.com/fighthorse/sampleBookReader/interface/api/protos"
 	"github.com/gin-gonic/gin"
+	"time"
 	"xorm.io/xorm/caches"
 )
+
+// VerifyUserName 验证用户名是否存在
+func (s *Service) VerifyUserName(c *gin.Context, userName string) (ok bool, err error) {
+	// userName lock
+	u := query.Use(s.Dao.Master).Member
+	user, err1 := u.WithContext(c.Request.Context()).Where(u.MemberName.Eq(userName)).First()
+	if err1 != nil {
+		if err1.Error() == query.EmptyRecord {
+			return false, nil
+		}
+		err = err1
+		return
+	}
+	if user != nil && user.MemberName != "" {
+		return true, nil
+	}
+	return false, nil
+}
+func (s *Service) Register(c *gin.Context, userName, pwd string) (err error) {
+	// userName lock
+	u := query.Use(s.Dao.Master).Member
+	user, err1 := u.WithContext(c.Request.Context()).Where(u.MemberName.Eq(userName)).First()
+	if err1 != nil && err1.Error() != query.EmptyRecord {
+		err = err1
+		return
+	}
+	// 验证密码
+	if user != nil && user.MemberName != "" {
+		err = errors.New("账户已存在")
+		return
+	}
+	err = u.WithContext(c.Request.Context()).Create(&model.Member{
+		MemberName:  userName,
+		MemberPwd:   caches.Md5(pwd),
+		MemberDesc:  "这个人自己注册",
+		ReadBooks:   0,
+		RegisterDay: time.Now().Format("2006-01-02 15:04:05"),
+	})
+	if err != nil {
+		return
+	}
+	return
+}
 
 func (s *Service) VerifyUser(c *gin.Context, userName, pwd string) (ok bool, err error) {
 	// userName lock
@@ -20,6 +65,10 @@ func (s *Service) VerifyUser(c *gin.Context, userName, pwd string) (ok bool, err
 			return
 		}
 		err = err1
+		return
+	}
+	if user == nil {
+		err = errors.New("用户不存在或者用户名错误")
 		return
 	}
 	// 验证密码
