@@ -22,6 +22,7 @@ var Generators = map[string]table.Generator{
 	// admin/info/category
 	"category": models.GetCategoryTable,
 	"book":     models.GetBookTable,
+	"author":   models.GetAuthorTable,
 	"chapter":  models.GetChapterTable,
 	"comment":  models.GetCommentTable,
 	"member":   models.GetMemberTable,

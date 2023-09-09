@@ -29,6 +29,9 @@
     <script src="/html/bootstrap-3.4.1-dist/js/jq3.6.0.js" ></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="/html/bootstrap-3.4.1-dist/js/bootstrap.min.js" ></script>
+    <script src="layer/layer.js" ></script>
+    <script src="store/localforage.min.js" ></script>
+    <script src="store/login.js" ></script>
 </head>
 <body style="background-color: #f5f5f5;padding:50px;">
 
@@ -42,6 +45,20 @@
                 <li role="presentation" ><a href="shelf.html">书架</a></li>
                 <li role="presentation" class="active"><a href="reader.html">阅读记录</a></li>
                 <li role="presentation"><a href="feedback.html">反馈</a></li>
+
+                <li role="presentation" id="isLogin" >
+                    <a href="sign-in.html" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        去登录</a>
+                </li>
+                <li class="dropdown"  id="isLoginTrue" style="display: none"  >
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+                        <strong id="userNmaeSee"></strong> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">个人中心</a></li>
+                        <li><a href="#" onclick="LoginOut()" >退出登录</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
     </nav>

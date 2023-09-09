@@ -26,7 +26,7 @@ func GetCategoryTable(ctx *context.Context) table.Table {
 		FieldFilterable().
 		FieldSortable().
 		FieldEditAble()
-	info.AddField("是否删除", "is_del", db.Tinyint).
+	info.AddField("分类简介", "category_desc", db.Varchar).
 		FieldFilterable().
 		FieldEditAble()
 	info.SetTable("category").SetTitle("分类管理").SetDescription("分类管理")
@@ -37,8 +37,8 @@ func GetCategoryTable(ctx *context.Context) table.Table {
 		FieldDisableWhenUpdate()
 	formList.AddField("分类名称", "category_name", db.Varchar, form.Text)
 	formList.AddField("继承父分类id", "parent_id", db.Int, form.Number)
-	formList.AddField("是否删除", "is_del", db.Tinyint, form.Number).
-		FieldDefault("0")
+	formList.AddField("分类简介", "category_desc", db.Varchar, form.Text).
+		FieldDefault("")
 
 	formList.SetTable("category").SetTitle("Category").SetDescription("Category")
 

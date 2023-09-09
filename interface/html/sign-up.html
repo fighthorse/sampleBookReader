@@ -29,6 +29,9 @@
     <script src="/html/bootstrap-3.4.1-dist/js/jq3.6.0.js" ></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="/html/bootstrap-3.4.1-dist/js/bootstrap.min.js" ></script>
+    <script src="layer/layer.js" ></script>
+    <script src="store/localforage.min.js" ></script>
+    <script src="store/login.js" ></script>
 </head>
 <body style="background-color: #f5f5f5;">
 
@@ -94,7 +97,16 @@
 </div>
 
 <script type="application/javascript">
+    $(document).ready(function() {
+        setTimeout(function(){
+            if ( _UserToken !== "" ) {
+                layer.msg("已登录")
+                //回到首页
+                window.location.href = "/"
+            }
+        },1000)
 
+    });
 
 </script>
 </body>

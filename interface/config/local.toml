@@ -84,7 +84,7 @@ timeout = 0.3
 name = "base"
 [mysql.master]
 driver = "mysql"
-dsn = "user:123456@tcp(127.0.0.1:3306)/samplebook?charset=utf8mb4&parseTime=True&loc=Local"
+dsn = "user:123456@tcp(127.0.0.1:3306)/go_admin?charset=utf8mb4&parseTime=True&loc=Local"
 max_open_conns = 20
 max_idle_conns = 10
 max_life_conns = 60
