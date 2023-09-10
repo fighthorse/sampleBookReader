@@ -120,7 +120,7 @@ func (s *Service) ReaderList(c *gin.Context, req *protos.MemberReq, uid int32) (
 	var chapterIds []int32
 	for _, kk := range list {
 		bookIds = append(bookIds, kk.BookID)
-		chapterIds = append(bookIds, kk.ChapterID)
+		chapterIds = append(chapterIds, kk.ChapterID)
 	}
 	// 批量查询数据信息
 	yy := query.Use(s.Dao.Master).Book
@@ -132,7 +132,7 @@ func (s *Service) ReaderList(c *gin.Context, req *protos.MemberReq, uid int32) (
 
 	//章节
 	zz := query.Use(s.Dao.Master).Chapter
-	chapterInfo, _ := zz.WithContext(c.Request.Context()).Where(zz.ID.In(chapterIds...)).Select(zz.ID, zz.ChapterName, zz.ChapterRank).Find()
+	chapterInfo, _ := zz.WithContext(c.Request.Context()).Debug().Where(zz.ID.In(chapterIds...)).Select(zz.ID, zz.ChapterName, zz.ChapterRank).Find()
 	chapterMap := make(map[int32]*model.Chapter)
 	for _, b := range chapterInfo {
 		chapterMap[b.ID] = b

@@ -115,6 +115,7 @@
     function SearchCategory(id,name){
         $("#category_name").html(name)
         category_id = id
+        $("#book-list").empty()
         LoadBook(1,id);
     }
 

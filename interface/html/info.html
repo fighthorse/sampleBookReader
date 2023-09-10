@@ -56,9 +56,9 @@
 
 <div class="row" style="padding-left: 30px;">
     <div class="row text-center" style="padding: 10px;">
-        <p class="text-left" id="book_title">《每天懂一点人情世故》 </p>
-        <h2 id="chapter_name">2.低得下头，才能抬得起头</h2>
-        <p id="book_copyright">作者： 周军</p>
+        <p class="text-left" id="book_title"></p>
+        <h2 id="chapter_name">2.</h2>
+        <p id="book_copyright"></p>
     </div>
     <div class="row" style="padding: 10px;" >
         <p id="chapter_content"></p>
@@ -82,22 +82,6 @@
 
         <div class="col-xs-8 col-sm-8 col-md-8" style="margin-top: 30px;" id="book-list">
 
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h5 class="panel-title">XIAOMING</h5>
-                </div>
-                <div class="panel-body">
-                    人生百态，各有千秋。一个人生活在这个世界上，就要面对各种各样的人、各种各样的事、各种各样的人际关系。一个人不管有多聪明，多能干，背景条件有多好，如果不懂得如何做人、做事，那么他最终的结局肯定是失败。
-                </div>
-            </div>
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h5 class="panel-title">XIAOMING</h5>
-                </div>
-                <div class="panel-body">
-                    人生百态，各有千秋。一个人生活在这个世界上，就要面对各种各样的人、各种各样的事、各种各样的人际关系。一个人不管有多聪明，多能干，背景条件有多好，如果不懂得如何做人、做事，那么他最终的结局肯定是失败。
-                </div>
-            </div>
         </div>
     </div>
 
@@ -227,8 +211,12 @@
                     layer.msg(res.message)
                     return
                 }
-                pageNow = res.data.pn
-                ParseDataToDom(res.data.pn , res.data.list)
+                if (res.data.pn > 1 ){
+                    pageNow = res.data.pn
+
+                    ParseDataToDom(res.data.pn , res.data.list)
+                }
+
             });
     }
     function ParseDataToDom(pn,data ){
