@@ -69,48 +69,12 @@
     <h4>登录账号，同步在浏览记录</h4>
     <a class="btn btn-danger" href="sign-in.html">去登录账户</a>
 </div>
-<div class="row" style="padding: 30px;">
+<div class="row" style="padding: 30px;display: none" id="haslogin">
     <div class="row" style="padding: 30px;">
         <h3>浏览记录</h3>
     </div>
-    <div class="row" style="padding: 30px;">
-        <div class="media col-xs-6 col-sm-6 col-md-6">
-            <div class="media-left">
-                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">
-            </div>
-            <div class="media-body" style="padding: 5px;">
-                <h4 class="media-heading">每天懂一点人情世故</h4>
-                这本书并不是教你违心、虚伪、奸诈地迎合别人，钻空子，占便宜，而是告诉年轻人在处世方面，在善良、真诚、宽容的基础上，做事掌握分寸，谨言慎行，礼行天下，智慧灵活地待人接物。如果能做到这些，我们会少很多烦恼，对自己的生活和工作必定会有所帮助！
-                <p class="text-right">
-                    <a class="btn btn-info" href="read.html?book_id=3">继续阅读</a>
-                </p>
-            </div>
-        </div>
-        <div class="media col-xs-6 col-sm-6 col-md-6">
-            <div class="media-left">
-                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">
-            </div>
-            <div class="media-body" style="padding: 5px;">
-                <h4 class="media-heading">每天懂一点人情世故</h4>
-                这本书并不是教你违心、虚伪、奸诈地迎合别人，钻空子，占便宜，而是告诉年轻人在处世方面，在善良、真诚、宽容的基础上，做事掌握分寸，谨言慎行，礼行天下，智慧灵活地待人接物。如果能做到这些，我们会少很多烦恼，对自己的生活和工作必定会有所帮助！
-                <p class="text-right">
-                    <a class="btn btn-info" href="read.html?book_id=3">继续阅读</a>
-                </p>
-            </div>
-        </div>
-        <div class="media col-xs-6 col-sm-6 col-md-5">
-            <div class="media-left">
-                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">
-            </div>
-            <div class="media-body" style="padding: 5px;">
-                <h4 class="media-heading">每天懂一点人情世故</h4>
-                这本书并不是教你违心、虚伪、奸诈地迎合别人，钻空子，占便宜，而是告诉年轻人在处世方面，在善良、真诚、宽容的基础上，做事掌握分寸，谨言慎行，礼行天下，智慧灵活地待人接物。如果能做到这些，我们会少很多烦恼，对自己的生活和工作必定会有所帮助！
-                <p class="text-right">
-                    <a class="btn btn-info" href="read.html?book_id=3">继续阅读</a>
-                </p>
-            </div>
-        </div>
-
+    <div class="row" style="padding: 30px;" id="book-list">
+        <h2>空空如夜，请去发现更多有趣的内容吧</h2>
     </div>
 </div>
 <div class="row">
@@ -135,8 +99,70 @@
 </div>
 
 <script type="application/javascript">
+    let pageNow = 1
+    $(document).ready(function() {
+        setTimeout(function(){
+            LoadPage()
+        },600)
+        // 滑动到底部 加载新的页
+        $(window).on('scroll', function() {
+            if ( _UserToken === "" ) {
+                return
+            }
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                let i = pageNow + 1
+                LoadBook(i);  // 当滚动到页面底部时加载数据
+            }
+        });
+    });
 
+    function LoadPage(){
+        if ( _UserToken !== "" ) {
+            $("#nologin").hide()
+            $("#haslogin").show()
+            LoadBook(1)
+        }else{
+            $("#nologin").show()
+            $("#haslogin").hide()
+        }
+    }
 
+    function LoadBook(page){
+        $.get("/member/shelf", {"pn":page,"token":_UserToken},
+            function(res){
+                if (res.code !== 0 ){
+                    layer.msg(res.message)
+                    return
+                }
+                if (res.data.list.length <= 0 ){
+                    return
+                }
+                pageNow = res.data.pn
+                ParseDataToDom( res.data.pn, res.data.list)
+            });
+    }
+
+    function ParseDataToDom(pn,data){
+        console.log(pn,data)
+        if( pn === 1 && data.length() >= 1) {
+            $("#book-list").empty()
+        }
+        // 动态生成书籍列表
+        $.each(data, function(index, book) {
+            let str = '<div class="media col-xs-6 col-sm-6 col-md-5">' +
+                '            <div class="media-left">' +
+                '                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">' +
+                '            </div>' +
+                '            <div class="media-body" style="padding: 5px;">' +
+                '                <h4 class="media-heading">'+book.book_info.book_title+'</h4>'+book.book_info.book_desc+
+                '<p>'+book.book_info.copyright+'</p><p>'+book.chpater_info.chapter_titile+'</p><p class="text-right">' +
+                '                    <a class="btn btn-info" href="read.html?book_id='+book.book_id+'&chapter_id='+book.chapter_id+'">继续阅读</a>' +
+                '                </p>' +
+                '            </div>' +
+                '        </div>'
+            $("#book-list").append(str)
+        });
+    }
 </script>
 </body>
 </html>

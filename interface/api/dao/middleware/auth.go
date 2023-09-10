@@ -26,7 +26,8 @@ func GuestRequired(c *gin.Context) {
 	if err != nil {
 		return
 	}
-	c.Set("user_info", data)
+	c.Set("user-info", data)
+	c.Next()
 }
 
 func TokenRequired(c *gin.Context) {
@@ -50,4 +51,5 @@ func TokenRequired(c *gin.Context) {
 		return
 	}
 	c.Set("user_info", data)
+	c.Next()
 }

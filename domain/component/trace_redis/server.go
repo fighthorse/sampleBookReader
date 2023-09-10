@@ -22,6 +22,17 @@ func (r *RedisInstance) GetKey(ctx context.Context, key string) (string, error) 
 	return r.Client.Get(ctx, key)
 }
 
+func (r *RedisInstance) SetKey(ctx context.Context, key, val string, ttl time.Duration) (string, error) {
+	return r.Client.Set(ctx, key, val, ttl)
+}
+
+func (r *RedisInstance) DelKey(ctx context.Context, key string) (int64, error) {
+	return r.Client.Del(ctx, key)
+}
+func (r *RedisInstance) SetNxKey(ctx context.Context, key, val string, ttl time.Duration) (bool, error) {
+	return r.Client.SetNX(ctx, key, val, ttl)
+}
+
 func (r *RedisInstance) HMSetKey(ctx context.Context, key string, mdata map[string]interface{}) (string, error) {
 	return r.Client.HMSet(ctx, key, mdata)
 }

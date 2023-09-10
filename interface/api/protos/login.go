@@ -12,6 +12,7 @@ type PersonLogin struct {
 }
 
 type Person struct {
+	Id      int32  `form:"id" json:"id"`           //登录用户id
 	Name    string `form:"name" json:"name"`       //登录用户
 	Ip      string `form:"ip" json:"ip"`           //登录用户
 	Token   string `form:"token" json:"token"`     // token有效

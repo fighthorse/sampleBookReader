@@ -1,4 +1,4 @@
-package login
+package member
 
 import (
 	"github.com/fighthorse/sampleBookReader/domain/component/db"

@@ -55,7 +55,9 @@ func main() {
 
 	// start server
 	//gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.DebugMode)
 	r := gin.New()
+
 	// Global middleware
 	r.Use(middleware.CustomRecovery)
 	//instrument api count

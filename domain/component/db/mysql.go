@@ -31,11 +31,13 @@ func NewDB(arr []Mysql) (err error) {
 			mm, err = gorm.Open(mysql.Open(v.Master.DSN), &gorm.Config{
 				SkipDefaultTransaction: true, //禁用事物
 				QueryFields:            true, // 打印sql
+				PrepareStmt:            true,
 			})
 			if v.Slave.DSN != "" {
 				vv, err = gorm.Open(mysql.Open(v.Slave.DSN), &gorm.Config{
 					SkipDefaultTransaction: true, //禁用事物
 					QueryFields:            true, // 打印sql
+					PrepareStmt:            true,
 				})
 			}
 			if vv == nil {

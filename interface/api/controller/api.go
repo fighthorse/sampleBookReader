@@ -2,8 +2,10 @@ package controller
 
 import (
 	"github.com/fighthorse/sampleBookReader/interface/api/controller/amap"
+	"github.com/fighthorse/sampleBookReader/interface/api/controller/book"
 	"github.com/fighthorse/sampleBookReader/interface/api/controller/hc"
 	"github.com/fighthorse/sampleBookReader/interface/api/controller/login"
+	"github.com/fighthorse/sampleBookReader/interface/api/controller/member"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +20,8 @@ func Init(r *gin.Engine) error {
 	hc.RegisterHttp(r)
 	login.RegisterHttp(r)
 	amap.RegisterHttp(r)
+	book.RegisterHttp(r)
+	member.RegisterHttp(r)
 
 	return nil
 }

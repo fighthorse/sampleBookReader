@@ -14,6 +14,12 @@
             max-width: 250px;
             margin-left: 10px;
         }
+
+        .book_desc {
+            text-indent: 32px;
+            /* font-style: initial; */
+            font: italic 14px Arial, sans-serif;
+        }
     </style>
     <script src="bootstrap-3.4.1-dist/js/jq3.6.0.js" ></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -59,15 +65,14 @@
         <h3>分类列表</h3>
     </div>
     <div class="row" style="padding: 5px;">
-            <ul id="category-list"  style="display: flex;">
-                <li class="list-group-item list-new" >玄幻</li>
-                <li class="list-group-item list-new">修真</li>
-                <li class="list-group-item list-new">都市</li>
-                <li class="list-group-item list-new">历史</li>
+            <ul  style="display: flex;" id="category_list">
             </ul>
     </div>
     <div class="row" style="padding: 30px;">
-        <div id="book-list" class="col-xs-10 col-sm-10 col-md-10">
+        <div  class="col-xs-10 col-sm-10 col-md-10">
+            <h4>当前加载分类列表：<strong id="category_name">默认</strong></h4>
+        </div>
+        <div id="book-list" class="col-xs-12 col-sm-12 col-md-12">
             <!-- 动态加载书籍 -->
         </div>
     </div>
@@ -94,112 +99,74 @@
 </div>
 
 <script type="application/javascript">
-
+    let pageNow = 1
+    let category_id = 1
     $(document).ready(function() {
-
-        loadBooksByCategory("玄幻");
-
-        $(".list-group-item").click(function() {
-            // 获取所点击的分类
-            var category = $(this).text();
-
-            // 根据分类加载书籍列表
-            loadBooksByCategory(category);
-        });
-
-        function loadBooksByCategory(category) {
-            // 清空之前加载的书籍
-            $("#book-list").empty();
-
-            // 模拟异步加载书籍数据
-            setTimeout(function() {
-                // 根据分类获取书籍数据
-                var books = getBooksByCategory(category);
-
-                if (books.length > 0) {
-                    // 动态生成书籍列表
-                    $.each(books, function(index, book) {
-                        let str = "<div class='panel panel-default'><div class='panel-body'><h3>" +book.title +
-                            "</h3><p>" +book.author +
-                            "</p><p>" +book.description+
-                            "</p><p class='text-right'> 000 <a href='read.html?" + book.id + "'>去阅读</a></p></div></div>"
-                        console.log(str)
-                        $("#book-list").append(str)
-                    });
-                } else {
-                    $("#book-list").html("暂无该分类的书籍")
-                }
-            }, 500);
-        }
-
-        function getBooksByCategory(category) {
-            // 此处通过分类获取对应的书籍数据
-            // 模拟返回书籍数据
-            if (category === "玄幻") {
-                return [
-                    {
-                        id:"book_id=1",
-                        title: "诛仙",
-                        author: "萧鼎",
-                        description: "草根少年张小凡，机缘巧合，步入仙门，修行之路一波三折。"
-                    },
-                    {
-                        id:"book_id=2",
-                        title: "斗罗大陆",
-                        author: "唐家三少",
-                        description: "唐舞麟因为带着被人嫉恨的盘体中的神奇技能，为了能顺利的成长。"
-                    }
-                ];
-            } else if (category === "修真") {
-                return [
-                    {
-                        id:"book_id=3",
-                        title: "凡人修仙传",
-                        author: "忘语",
-                        description: "楚凡意外穿越到一个陌生的世界，成了山村的一个穷小子。"
-                    },
-                    {
-                        id:"book_id=4",
-                        title: "儒道至圣",
-                        author: "忘语",
-                        description: "被常人视为废物的孟辰，身怀古圣之残魂，看他如何逆天改命。"
-                    }
-                ];
-            } else if (category === "都市") {
-                return [
-                    {
-                        id:"book_id=5",
-                        title: "择天记",
-                        author: "猫腻",
-                        description: "上天入地的异能，超能力、瞬移、磁场、操控……无所不能."
-                    },
-                    {
-                        id:"book_id=6",
-                        title: "全职法师",
-                        author: "乱",
-                        description: "大学生罗晨，穿越到了一个类似中世纪的玄幻世界。"
-                    }
-                ];
-            } else if (category === "历史") {
-                return [
-                    {
-                        id:"book_id=7",
-                        title: "大明王朝1566",
-                        author: "黄易",
-                        description: "明朝的边缘人物石室彦，身上有个活佛的紫金神葫，从而表达出对道的敬仰。"
-                    },
-                    {
-                        id:"book_id=8",
-                        title: "明朝那些事儿",
-                        author: "当年明月",
-                        description: "风起四方，云布八方。徐之硕，国朝宰相，至尊章献皇后之孙。"
-                    }
-                ];
-            } else {
-                return [];
+        LoadCategory()
+        // 滑动到底部 加载新的页
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                let i = pageNow + 1
+                LoadBook(i,category_id);  // 当滚动到页面底部时加载数据
             }
-        }
+        });
     });
+
+    function SearchCategory(id,name){
+        $("#category_name").html(name)
+        category_id = id
+        LoadBook(1,id);
+    }
+
+    function LoadCategory(){
+        $.get("/book/category", {"token":_UserToken},
+            function(res){
+                if (res.code !== 0 ){
+                    layer.msg(res.message)
+                    return
+                }
+                ParseDataToDom2(res.data)
+            });
+    }
+
+    function ParseDataToDom2(data ){
+        // 动态生成书籍列表
+        $.each(data, function(index, book) {
+            if(index === 0)  {
+                SearchCategory(book.id,book.category_name)
+            }
+            let str = '<li class="list-group-item list-new btn" onclick="SearchCategory('+book.id+',\''+book.category_name+'\')"><a>'+book.category_name+'</a></li>'
+            $("#category_list").append(str)
+        });
+    }
+
+    function LoadBook(page,id){
+        console.log('page',page,"id",id)
+        $.get("/book/list", { "category_id":id,"pn":page,"token":_UserToken},
+            function(res){
+                if (res.code !== 0 ){
+                    layer.msg(res.message)
+                    return
+                }
+                if (res.data.list.length <= 0 ){
+                    return
+                }
+                pageNow = res.data.pn
+                ParseDataToDom( res.data.pn, res.data.list)
+            });
+    }
+
+    function ParseDataToDom(pn,data ){
+        $("#book-list").empty()
+        // 动态生成书籍列表
+        $.each(data, function(index, book) {
+            let str = "<div class='panel panel-default'><div class='panel-body'><h3>" +book.book_title +
+                "</h3><p>" +book.copyright +
+                "</p><p class='book_desc'>" +book.book_desc+
+                '</p><p class="text-right"><a class="btn btn-warning" href="read.html?"' + book.id + '">去阅读</a></p></div></div>'
+            $("#book-list").append(str)
+        });
+    }
 </script>
 </body>
 </html>

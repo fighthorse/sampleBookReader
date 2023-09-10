@@ -15,6 +15,9 @@ var (
 	JsonErr = ErrCode{Code: 10000, Msg: "参数解析失败"}
 
 	ParamsErr = ErrCode{Code: 10000, Msg: "参数校验失败"}
+
+	LogicErr = ErrCode{Code: 10001, Msg: "网络请求失败"}
+	LoginErr = ErrCode{Code: -126, Msg: "需要登录"}
 )
 
 func JsonErrExport(data ErrCode, err error, userMsg string) map[string]interface{} {

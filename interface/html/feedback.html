@@ -5,10 +5,10 @@
     <title>小说网站</title>
 
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="/html/bootstrap-3.4.1-dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css" >
 
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="/html/bootstrap-3.4.1-dist/css/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap-theme.min.css">
 
     <style>
         .login-contan {
@@ -67,23 +67,17 @@
 <div class="row" style="padding-left: 20px;">
     <div class="col-xs-8 col-sm-8 col-md-8">
         <h3><i class="glyphicon glyphicon-piggy-bank"></i>  有想法 有意见</h3>
-        <textarea class="form-control" placeholder="输入你的建议" required></textarea>
-        <a class="btn btn-info" style="margin-top: 10px;">提交反馈</a>
+        <textarea class="form-control" style="min-width: 200px;" placeholder="输入你的建议" required id="feed_con"></textarea>
+        <a class="btn btn-info" style="margin-top: 10px;" onclick="SubmitFeedBack()">提交反馈</a>
     </div>
 </div>
 
 <div class="row" style="padding: 30px;">
     <div class="row" style="padding: 30px;">
-        <h3><i class="glyphicon glyphicon-save-file"></i>我的反馈</h3>
+        <h3><i class="glyphicon glyphicon-save-file"></i>大家的反馈</h3>
     </div>
-    <div class="list-group">
-        <a href="#" class="list-group-item">
-            <h3 class="list-group-item-heading">##1</h3>
-            <h5 class="list-group-item-heading">反馈内容</h5>
-            <p class="list-group-item-text">...</p>
-            <h5 class="list-group-item-heading">反馈回复</h5>
-            <p class="list-group-item-text">...</p>
-        </a>
+    <div class="list-group" id="book-list">
+        <h3>还没有提交你的想法哦</h3>
     </div>
 </div>
 <div class="row">
@@ -98,7 +92,7 @@
         <div class="container">
             <ul class="bs-docs-footer-links">
                 <li><a href="/about/">github源码</a></li>
-                <li><a href="/html/feedback.html">反馈</a></li>
+                <li><a href="feedback.html">反馈</a></li>
             </ul>
 
             <p>@Copyright. fighthorse </p>
@@ -109,7 +103,91 @@
 
 <script type="application/javascript">
 
+    let pageNow = 1
+    $(document).ready(function() {
+        setTimeout(function(){
+            LoadPage(1)
+        },600)
+        // 滑动到底部 加载新的页
+        $(window).on('scroll', function() {
+            if ( _UserToken === "" ) {
+                return
+            }
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                let i = pageNow + 1
+                LoadPage(i);  // 当滚动到页面底部时加载数据
+            }
+        });
+    });
 
+    function SubmitFeedBack(){
+        if ( _UserToken === "" ) {
+            layer.msg("请登录后操作")
+            return
+        }
+        var conebt = $("#feed_con").val()
+        if (conebt==="" || conebt.length <= 9) {
+            layer.msg("请输入有效反馈，不少于10个字")
+            return
+        }
+        $.post("/member/feedback", {"token":_UserToken,"content":conebt},
+            function(res){
+                if (res.code !== 0 ){
+                    layer.msg(res.message)
+                    return
+                }
+                layer.msg("提交成功")
+                LoadPage(1);
+            });
+
+    }
+    function LoadPage(page){
+        if ( _UserToken === "" ) {
+            layer.msg("请登录后操作")
+            return
+        }
+
+        $.get("/member/feedback", {"pn":page,"token":_UserToken},
+            function(res){
+                if (res.code !== 0 ){
+                    layer.msg(res.message)
+                    return
+                }
+
+                if (res.data.list.length <= 0 ){
+                    return
+                }
+                pageNow = res.data.pn
+                ParseDataToDom( res.data.pn, res.data.list)
+            });
+    }
+    function ParseDataToDom(pn,data){
+        console.log(pn,data)
+        if( pn === 1 && data.length >= 1) {
+            $("#book-list").empty()
+        }
+        // 动态生成书籍列表
+        $.each(data, function(ii, book) {
+            var tt = book.callback
+            if(tt===""){
+                tt = "感谢您的关注，希望能持续给您带来好的体验。"
+            }
+            var index = ii + 1
+            var divClass = "alert alert-success"
+            if (index >= 2 && index%2 === 0 ){
+                divClass = "alert alert-info"
+            }else if (index >= 3 && index%3=== 0 ){
+                divClass = "alert alert-success"
+            }
+            let str = '<div class="list-group-item '+divClass+'">' +
+                '            <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-align-left"></i>   '+book.id+'  ('+book.feed_day+')</h4>' +
+                '            <h5 class="list-group-item-heading">'+book.feed+'</h5>' +
+                '            <h5 class="list-group-item-heading"><strong>反馈回复</strong></h5>' +
+                '            <p class="list-group-item-text">'+tt+'</p>' +
+                '        </div>'
+            $("#book-list").append(str)
+        });
+    }
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package book
+package member
 
 import (
 	"github.com/fighthorse/sampleBookReader/interface/api/dao/middleware"
@@ -9,16 +9,16 @@ func RegisterHttp(r *gin.Engine) {
 	// Authorization group
 	// authorized := r.Group("/", AuthRequired())
 	// exactly the same as:
-	bg := r.Group("/book")
+	mb := r.Group("/member")
 	// per group middleware! in this case we use the custom created
 	// AuthRequired() middleware just in the "authorized" group.
-	bg.Use(middleware.GuestRequired)
+	mb.Use(middleware.GuestRequired)
 	{
-		bg.GET("/list", bookList)
-		bg.GET("/category", categoryList)
-		bg.GET("/info", bookInfo)
-		bg.GET("/chapter", chapter)
-		bg.GET("/comment", chapter)
-		bg.POST("/add_comment", chapter)
+		mb.GET("/shelf", shelfList)
+		mb.GET("/reader", readerList)
+		mb.POST("/add_shelf", addShelf)
+		mb.POST("/add_reader", addReader)
+		mb.POST("/feedback", feedback)
+		mb.GET("/feedback", getfeedback)
 	}
 }

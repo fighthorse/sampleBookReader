@@ -24,7 +24,7 @@ enable = true
 file_path = "/data/logs/app/app.log"
 level = "debug"
 [log.access]
-enable = true
+enable = false
 file_path = "/data/logs/app/access.log"
 
 [trace]

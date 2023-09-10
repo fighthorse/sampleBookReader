@@ -124,14 +124,14 @@
                 <div class="form-group">
                     <input type="text" class="form-control" id="searchBook" placeholder="小说名称">
                 </div>
-                <a  class="btn btn-default" onclick="LoadBook(1)">搜索小说</a>
+                <a  class="btn btn-warning" onclick="LoadBook(1)">搜索小说</a>
             </form>
         </div>
     </div>
 </nav>
 
 <div class="row text-center" style="padding: 20px;" id="book_list">
-    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="col-xs-6 col-sm-4 col-md-4">
         <div class="jumbotron" style="padding: 20px;">
             <h3>从前有座镇妖关</h3>
             <p class="text-left"  style="font-size: 14px;">从前，有这样一座关。 从前，有这样一群人。 这座关，寸寸染血。 这些人，不死不还。 只为在尸山血海中，弥留之际，转身时，能见那身后闪烁的万家灯火，岁岁平安。</p>
@@ -141,47 +141,6 @@
             </p>
         </div>
     </div>
-
-    <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="jumbotron" style="padding: 20px;">
-            <h3>西游记</h3>
-            <p class="text-left"  style="font-size: 14px;">孙悟空、猪八戒、沙和尚保护唐僧西天取经、历经九九八十一难的传奇历险故事。</p>
-            <p class="text-left"  style="font-size: 16px;" >作者： 千询 主角： 孙悟空</p>
-            <p class="text-right" style="padding-right: 20px;">
-                <a class="btn btn-info" href="read.html?book_id=1" role="button">去阅读</a></p>
-        </div>
-    </div>
-
-    <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="jumbotron" style="padding: 20px;">
-            <h3>稻草人</h3>
-            <p class="text-left"  style="font-size: 14px;">《稻草人》是新中国第一本为儿童而写的童话集，作者叶圣陶也是中国现代童话创作的拓荒者。他的童话构思新颖独特，描写细腻逼真，富于现实内容。叶圣陶的早期作品笔调抒情，风格唯美。</p>
-            <p class="text-left"  style="font-size: 16px;" >作者： 叶圣陶</p>
-            <p class="text-right" style="padding-right: 20px;">
-                <a class="btn btn-info" href="read.html?book_id=1" role="button">去阅读</a></p>
-        </div>
-    </div>
-
-    <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="jumbotron" style="padding: 20px;">
-            <h3>孩子，为你自己读书</h3>
-            <p class="text-left" style="font-size: 14px;">读书，是一件苦差事。大多数孩子都在抱怨，读书苦、读书累，甚至常常感到迷茫。其实，孩子有这种想法，大都是不明白为什么要读书，或者说认识不到读书的重要性。在这种状态下，孩子产生厌学、叛逆的行为，从而让老师和家长头疼不已。</p>
-            <p class="text-left" style="font-size: 16px;" >作者： 徐可夫编著</p>
-            <p class="text-right" style="padding-right: 20px;">
-                <a class="btn btn-info" href="read.html?book_id=1" role="button">去阅读</a></p>
-        </div>
-    </div>
-
-    <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="jumbotron" style="padding: 20px;">
-            <h3>稻草人</h3>
-            <p style="font-size: 14px;">《稻草人》是新中国第一本为儿童而写的童话集，作者叶圣陶也是中国现代童话创作的拓荒者。他的童话构思新颖独特，描写细腻逼真，富于现实内容。叶圣陶的早期作品笔调抒情，风格唯美。</p>
-            <p style="font-size: 16px;" >作者： 叶圣陶</p>
-            <p class="text-right" style="padding-right: 20px;">
-                <a class="btn btn-info" href="read.html?book_id=1" role="button">去阅读</a></p>
-        </div>
-    </div>
-
 </div>
 <div class="row">
 </div>
@@ -197,7 +156,7 @@
         <div class="container">
             <ul class="bs-docs-footer-links">
                 <li><a href="/about/">github源码</a></li>
-                <li><a href="/html/feedback.html">反馈</a></li>
+                <li><a href="feedback.html">反馈</a></li>
             </ul>
 
             <p>@Copyright. fighthorse </p>
@@ -224,19 +183,43 @@
 
 
     function LoadBook(page){
-
-        console.log(pageNow)
+        console.log('pageNow',page)
         var searchBook = $("#searchBook").val()
-        $.get("/book/list", { "searchBook":searchBook,"page":page,"token":_UserToken},
+        $.get("/book/list", { "name":searchBook,"pn":page,"token":_UserToken},
             function(res){
-                alert("Data Loaded: " + res);
                 if (res.code !== 0 ){
                     layer.msg(res.message)
                     return
                 }
-                pageNow = page
-
+                if (res.data.list <= 0) {
+                    return
+                }
+                pageNow = res.data.pn
+                ParseDataToDom( res.data.pn, res.data.list)
             });
+    }
+
+    function ParseDataToDom(index , data ){
+        let strHtml = ""
+        $.each(data,function(i, n){
+            let str = '<div class="col-xs-6 col-sm-4 col-md-4">' +
+                '        <div class="jumbotron" style="padding: 20px;">' +
+                '            <h3>'+n.book_title+'</h3>' +
+                '            <p style="font-size: 14px;">'+n.book_desc+'</p>' +
+                '            <p style="font-size: 16px;" >'+n.copyright+'</p>' +
+                '            <p class="text-right" style="padding-right: 20px;">' +
+                '                <a class="btn btn-info" href="read.html?book_id='+n.id +'" role="button">去阅读</a></p>' +
+                '        </div>' +
+                '    </div>'
+            strHtml += str
+        });
+
+
+        if (index <= 1) {
+            $("#book_list").html(strHtml)
+        }else{
+            $("#book_list").append(strHtml)
+        }
     }
 
 </script>
