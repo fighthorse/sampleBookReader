@@ -157,7 +157,9 @@
     }
 
     function ParseDataToDom(pn,data ){
-        $("#book-list").empty()
+        if ( pn === 1) {
+            $("#book-list").empty()
+        }
         // 动态生成书籍列表
         $.each(data, function(index, book) {
             let str = "<div class='panel panel-default'><div class='panel-body'><h3>" +book.book_title +

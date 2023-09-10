@@ -18,7 +18,9 @@ func RegisterHttp(r *gin.Engine) {
 		bg.GET("/category", categoryList)
 		bg.GET("/info", bookInfo)
 		bg.GET("/chapter", chapter)
-		bg.GET("/comment", chapter)
-		bg.POST("/add_comment", chapter)
+		bg.GET("/chapter_info", chapterInfo)
+		bg.GET("/chapter_next", chapterNext)
+		bg.GET("/comment", commentList)
+		bg.POST("/add_comment", commentAdd)
 	}
 }

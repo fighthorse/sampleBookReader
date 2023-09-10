@@ -14,15 +14,16 @@ import (
 func (s *Service) AddShelf(c *gin.Context, req *protos.AddShelfReq, uid int32) (err error) {
 	// 判断是否已经加过
 	u := query.Use(s.Dao.Master).MemberShelf
-	tt, err1 := u.WithContext(c.Request.Context()).Where(u.MemberID.Eq(uid), u.BookID.Eq(req.BookId)).First()
-	if err1 != nil {
-		err = err1
-		return
-	}
+	tt, _ := u.WithContext(c.Request.Context()).Where(u.MemberID.Eq(uid), u.BookID.Eq(req.BookId)).First()
+	//if err1 != nil && err1.Error() != query.EmptyRecord {
+	//	err = err1
+	//	return
+	//}
 	if tt != nil && tt.ID > 0 {
 		err = errors.New("记录已存在")
 		return
 	}
+	log.Info(c, "AddShelf1", log.Fields{"req": req, "uid": uid})
 	// 用户uid 枷锁
 	ok, err2 := s.RedisCache.SetNxKey(c, redis.ShelfUidKey.Fmt(uid), "1", 3*time.Second)
 	if err2 != nil {
@@ -41,6 +42,7 @@ func (s *Service) AddShelf(c *gin.Context, req *protos.AddShelfReq, uid int32) (
 		MemberID:  uid,
 	}
 	err = u.WithContext(c.Request.Context()).Create(da)
+	log.Warn(c, "AddShelf", log.Fields{"da": da})
 	return err
 }
 

@@ -20,6 +20,7 @@
     <script src="layer/layer.js" ></script>
     <script src="store/localforage.min.js" ></script>
     <script src="store/login.js" ></script>
+    <script src="store/url.js" ></script>
 </head>
 <body style="background-color: #f5f5f5;padding:50px;">
 
@@ -57,11 +58,15 @@
             <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">
         </div>
         <div class="media-body" style="padding: 5px;">
-            <h4 class="media-heading">每天懂一点人情世故</h4>
-            这本书并不是教你违心、虚伪、奸诈地迎合别人，钻空子，占便宜，而是告诉年轻人在处世方面，在善良、真诚、宽容的基础上，做事掌握分寸，谨言慎行，礼行天下，智慧灵活地待人接物。如果能做到这些，我们会少很多烦恼，对自己的生活和工作必定会有所帮助！
+            <h4 class="media-heading" id="book_name"></h4>
+            <p id="book_copyright">
+
+            </p>
+            <p id="book_desc">
+            </p>
             <p class="text-right">
-                <a class="btn btn-info" href="read.html?book_id=3">加入书架</a>
-                <a class="btn btn-warning" href="info.html?book_id=3">立即阅读</a>
+                <a class="btn btn-info"  onclick="AddShelf()"id="add-shelf">加入书架</a>
+                <a class="btn btn-warning" onclick="GoReadInfo()">立即阅读</a>
             </p>
         </div>
     </div>
@@ -97,130 +102,100 @@
 
 <script type="application/javascript">
 
-
+    // 获取当前页面的URL
+    var pageNow = 1
     $(document).ready(function() {
+        setTimeout(function (){
+            console.log("setTimeout --->")
+            getBooksInfo()
+            getBooksChapter(1)
+        },1500)
 
-        var books = getBooksChapter();
-        let str = " <ul  style=\"display: flex;\">"
-            // 动态生成书籍列表
-            $.each(books, function(index, book) {
-
-                if (index > 0 && index % 4 === 0) {
-                    str += "</ul>\n" +
-                        "        <ul   style=\"display: flex;\">"
+        // 滑动到底部 加载新的页
+        $(window).on('scroll', function() {
+            if ( _UserToken === "" ) {
+                return
+            }
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                let i = pageNow + 1
+                getBooksChapter(i);  // 当滚动到页面底部时加载数据
+            }
+        });
+    });
+    function getBooksInfo(){
+        var id = parseUrlParam(currentUrl, 'book_id');
+        $.get("/book/info", {"book_id":id,"token":_UserToken},
+            function(res){
+                if (res.code !== 0 ){
+                    layer.msg(res.message)
+                    return
                 }
-                str += "<li class=\"list-group-item list-new\" ><a href='info.html?book_id="+book.id
-                    +"&chapter_id="+book.chapter_sort
-                    +"'>" +book.title+
-                    "</a></li>"
+
+                $("#book_name").text(res.data.info.book_title)
+                $("#book_desc").text(res.data.info.book_desc)
+                $("#book_copyright").text(res.data.info.copyright)
+
+                if (res.data.is_shelf === 1) {
+                    $("#add-shelf").hide()
+                }else{
+                    $("#add-shelf").show()
+                }
 
             });
+    }
+    function getBooksChapter(page) {
+        // 解析参数ID
+        var id = parseUrlParam(currentUrl, 'book_id');
+        $.get("/book/chapter", {"book_id":id,"token":_UserToken,"pn":page,"ps":30},
+            function(res){
+                if (res.code !== 0 ){
+                    layer.msg(res.message)
+                    return
+                }
+                if (res.data.list.length <= 0 ){
+                    return
+                }
+                pageNow = res.data.pn
+                ParseDataToDom( res.data.pn, res.data.list)
+            });
+    }
+    function ParseDataToDom(pn,books){
+        if (pn===0) {
+            $("#chapter_list").empty()
+        }
+        let str = " <ul  style=\"display: flex;\">"
+        // 动态生成书籍列表
+        $.each(books, function(index, book) {
+            console.log(index,book)
+            if (index > 0 && index % 4 === 0) {
+                str += "</ul>\n" +
+                    "        <ul   style=\"display: flex;\">"
+            }
+            str += "<li class=\"list-group-item list-new\" >" +
+                "<a href='info.html?book_id="+book.book_id +"&chapter_id="+book.id+"'>" +book.chapter_name+
+                "</a></li>"
+
+        });
         str += "</ul>\n"
         $("#chapter_list").append(str)
-    });
+    }
 
-    function getBooksChapter() {
-        return [
-            {
-                "id": "2",
-                "title": "第一章 大智若愚——智慧的最高境界",
-                "is_vip": "0",
-                "update_time": "1611213217",
-                "words": "136",
-                "index": "2",
-                "chapter_sort": "2"
-            },
-            {
-                "id": "3",
-                "title": "1.放下架子，以退为进",
-                "is_vip": "0",
-                "update_time": "1611213217",
-                "words": "1625",
-                "index": "3",
-                "chapter_sort": "3"
-            },
-            {
-                "id": "4",
-                "title": "2.低得下头，才能抬得起头",
-                "is_vip": "0",
-                "update_time": "1611213217",
-                "words": "2400",
-                "index": "4",
-                "chapter_sort": "4"
-            },
-            {
-                "id": "5",
-                "title": "3.诚实不当傻瓜，坦诚而不幼稚",
-                "is_vip": "0",
-                "update_time": "1611213217",
-                "words": "2600",
-                "index": "5",
-                "chapter_sort": "5"
-            },
-            {
-                "id": "6",
-                "title": "4.别卖弄小聪明",
-                "is_vip": "0",
-                "update_time": "1611213218",
-                "words": "1844",
-                "index": "6",
-                "chapter_sort": "6"
-            },
-            {
-                "id": "7",
-                "title": "5.“糊涂”也有大智慧",
-                "is_vip": "0",
-                "update_time": "1611213218",
-                "words": "1684",
-                "index": "7",
-                "chapter_sort": "7"
-            },
-            {
-                "id": "8",
-                "title": "6.小不忍难成大器",
-                "is_vip": "0",
-                "update_time": "1611213218",
-                "words": "2128",
-                "index": "8",
-                "chapter_sort": "8"
-            },
-            {
-                "id": "9",
-                "title": "7.识破别点破，面子上好过",
-                "is_vip": "0",
-                "update_time": "1611213218",
-                "words": "1241",
-                "index": "9",
-                "chapter_sort": "9"
-            },
-            {
-                "id": "10",
-                "title": "第二章 吃亏是福——超凡脱俗的心态",
-                "is_vip": "0",
-                "update_time": "1611213218",
-                "words": "125",
-                "index": "10",
-                "chapter_sort": "10"
-            },
-            {
-                "id": "11",
-                "title": "1.吃亏是一种隐性投资",
-                "is_vip": "0",
-                "update_time": "1611213218",
-                "words": "2922",
-                "index": "11",
-                "chapter_sort": "11"
-            },
-            {
-                "id": "12",
-                "title": "2.付出就有回报",
-                "is_vip": "0",
-                "update_time": "1611213218",
-                "words": "2765",
-                "index": "12",
-                "chapter_sort": "12"
-            }
-        ];
+    function AddShelf(){
+        var id = parseUrlParam(currentUrl, 'book_id');
+        $.post("/member/add_shelf", {"book_id":id,"token":_UserToken},
+            function(res){
+                if (res.code !== 0 ){
+                    layer.msg(res.message)
+                    return
+                }
+                layer.msg("加入成功")
+                $("#add-shelf").hide()
+            });
+    }
+
+    function GoReadInfo(){
+        var id = parseUrlParam(currentUrl, 'book_id');
+        window.location.href = "/html/info.html?book_id="+id
     }
 </script>
 </body>

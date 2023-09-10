@@ -13,6 +13,18 @@ type CategoryReq struct {
 	CategoryId int32 `json:"category_id,omitempty" form:"category_id"` //分类id
 }
 
+type ChapterReq struct {
+	BookId    int32 `json:"book_id,omitempty" form:"book_id"`
+	ChapterId int32 `json:"chapter_id,omitempty" form:"chapter_id"`
+	PageSep
+}
+
+type ChapterCommentReq struct {
+	BookId    int32  `json:"book_id,omitempty" form:"book_id"`
+	ChapterId int32  `json:"chapter_id,omitempty" form:"chapter_id"`
+	Content   string `json:"content,omitempty" form:"content"`
+}
+
 type BookListReq struct {
 	Category int32  `json:"category_id,omitempty" form:"category_id"` //分类id
 	Name     string `json:"name,omitempty" form:"name"`               //搜索名称
@@ -24,6 +36,20 @@ type BookListResp struct {
 	Total int64       `json:"total,omitempty" form:"total"`
 	Pn    int         `json:"pn,omitempty" form:"pn"`
 	List  interface{} `json:"list,omitempty" form:"list"`
+}
+
+type BookChapterResp struct {
+	Info    interface{} `json:"info,omitempty" form:"info"`
+	Chapter interface{} `json:"chapter,omitempty" form:"chapter"`
+	Mid     int32       `json:"mid,omitempty" form:"mid"`
+	Name    string      `json:"name,omitempty" form:"name"`
+}
+
+type BookInfoResp struct {
+	Info    interface{} `json:"info,omitempty" form:"info"`
+	IsShelf int32       `json:"is_shelf,omitempty" form:"is_shelf"`
+	Mid     int32       `json:"mid,omitempty" form:"mid"`
+	Name    string      `json:"name,omitempty" form:"name"`
 }
 
 type MemberReq struct {

@@ -12,4 +12,6 @@ var (
 	LoginUidKey trace_redis.RedisKeys = "login:%d"
 	ShelfUidKey trace_redis.RedisKeys = "shelf:%d"
 	FeedUidKey  trace_redis.RedisKeys = "feed:%d"
+
+	CommentUidKey trace_redis.RedisKeys = "comment:%d"
 )

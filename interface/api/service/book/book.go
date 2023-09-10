@@ -7,6 +7,28 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func (s *Service) BookInfo(c *gin.Context, req *protos.ChapterReq, userInfo *protos.Person) (resp *protos.BookInfoResp, err error) {
+
+	resp = &protos.BookInfoResp{}
+
+	u := query.Use(s.Dao.Master).Book
+	tt, err := u.WithContext(c.Request.Context()).Where(u.ID.Eq(req.BookId)).First()
+	if err != nil {
+		return
+	}
+	resp.Info = tt
+	if userInfo != nil && userInfo.Id > 0 {
+		resp.Mid = userInfo.Id
+		resp.Name = userInfo.Name
+		n := query.Use(s.Dao.Master).MemberShelf
+		tt2, _ := n.WithContext(c.Request.Context()).Where(n.MemberID.Eq(userInfo.Id), n.BookID.Eq(req.BookId)).First()
+		if tt2 != nil && tt2.ID > 0 {
+			resp.IsShelf = 1
+		}
+	}
+	return
+}
+
 func (s *Service) BookList(c *gin.Context, req *protos.BookListReq) (resp protos.BookListResp, err error) {
 	resp = protos.BookListResp{}
 	// 数据组装
