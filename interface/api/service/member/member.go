@@ -66,6 +66,7 @@ func (s *Service) ShelfList(c *gin.Context, req *protos.MemberReq, uid int32) (r
 			"member_id":    kk.MemberID,
 			"book_id":      kk.BookID,
 			"chapter_id":   kk.ChapterID,
+			"read_day":     kk.ReadDay,
 			"book_info":    bookMap[kk.BookID],
 			"chapter_info": chapterMap[kk.ChapterID],
 		}

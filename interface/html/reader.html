@@ -74,7 +74,7 @@
         <h3>浏览记录</h3>
     </div>
     <div class="row" style="padding: 30px;" id="book-list">
-        <h2>空空如夜，请去发现更多有趣的内容吧</h2>
+        <h3>空空如夜，请去发现更多有趣的内容吧</h3>
     </div>
 </div>
 <div class="row">
@@ -128,13 +128,13 @@
     }
 
     function LoadBook(page){
-        $.get("/member/shelf", {"pn":page,"token":_UserToken},
+        $.get("/member/reader", {"pn":page,"token":_UserToken},
             function(res){
                 if (res.code !== 0 ){
                     layer.msg(res.message)
                     return
                 }
-                if (res.data.list.length <= 0 ){
+                if (res.data.total <= 0 ){
                     return
                 }
                 pageNow = res.data.pn
@@ -144,22 +144,41 @@
 
     function ParseDataToDom(pn,data){
         console.log(pn,data)
-        if( pn === 1 && data.length() >= 1) {
+        if( pn === 1 ) {
             $("#book-list").empty()
         }
         // 动态生成书籍列表
         $.each(data, function(index, book) {
-            let str = '<div class="media col-xs-6 col-sm-6 col-md-5">' +
-                '            <div class="media-left">' +
-                '                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">' +
-                '            </div>' +
-                '            <div class="media-body" style="padding: 5px;">' +
-                '                <h4 class="media-heading">'+book.book_info.book_title+'</h4>'+book.book_info.book_desc+
-                '<p>'+book.book_info.copyright+'</p><p>'+book.chpater_info.chapter_titile+'</p><p class="text-right">' +
-                '                    <a class="btn btn-info" href="read.html?book_id='+book.book_id+'&chapter_id='+book.chapter_id+'">继续阅读</a>' +
-                '                </p>' +
-                '            </div>' +
-                '        </div>'
+            let str = ''
+            if ( book.chapter_id >  0) {
+                str += '<div class="media col-xs-12 col-sm-12 col-md-10">' +
+                    '            <div class="media-left">' +
+                    '<p>'+book.last_update+'</p>'+
+                    '                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">' +
+                    '            </div>' +
+                    '            <div class="media-body" style="padding: 5px;">' +
+                    '                <h4 class="media-heading">'+book.book_info.book_title+'</h4>'+book.book_info.book_desc+
+                    '<p>'+book.book_info.copyright+'</p><p>阅读至：'+book.chapter_info.chapter_name+'</p><p class="text-right">' +
+                    '                    <a class="btn btn-info" href="read.html?book_id='+book.book_id+'&chapter_id='+book.chapter_id+'">继续阅读</a>' +
+                    '                </p>' +
+                    '            </div>' +
+                    '        </div>'
+            }else{
+                str += '<div class="media col-xs-12 col-sm-12 col-md-10">' +
+                    '            <div class="media-left">' +
+                    '<p>'+book.last_update+'</p>'+
+                    '                <img class="media-object" src="img/shelf3.png" alt="默认封面" style="max-height: 150px;">' +
+                    '            </div>' +
+                    '            <div class="media-body" style="padding: 5px;">' +
+                    '                <h4 class="media-heading">'+book.book_info.book_title+'</h4>'+book.book_info.book_desc+
+                    '<p>'+book.book_info.copyright+'</p><p>未开始阅读</p><p class="text-right">' +
+                    '                    <a class="btn btn-info" href="read.html?book_id='+book.book_id+'">继续阅读</a>' +
+                    '                </p>' +
+                    '            </div>' +
+                    '        </div>'
+            }
+
+
             $("#book-list").append(str)
         });
     }

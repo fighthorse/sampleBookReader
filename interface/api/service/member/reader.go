@@ -89,7 +89,6 @@ func (s *Service) AddReader(c *gin.Context, req *protos.AddShelfReq, uid int32) 
 }
 
 func (s *Service) ReaderList(c *gin.Context, req *protos.MemberReq, uid int32) (resp *protos.MemberBookListResp) {
-	resp = &protos.MemberBookListResp{}
 	// 数据组装
 	if req.Ps <= 0 || req.Ps > 20 {
 		req.Ps = 10
@@ -97,7 +96,9 @@ func (s *Service) ReaderList(c *gin.Context, req *protos.MemberReq, uid int32) (
 	if req.Pn <= 0 || req.Pn > 1000 {
 		req.Pn = 1
 	}
-
+	resp = &protos.MemberBookListResp{
+		Pn: req.Pn,
+	}
 	u := query.Use(s.Dao.Master).MemberReader
 	tt := u.WithContext(c.Request.Context()).Where(u.MemberID.Eq(uid))
 	total, err := tt.Debug().Count()
@@ -143,6 +144,7 @@ func (s *Service) ReaderList(c *gin.Context, req *protos.MemberReq, uid int32) (
 			"member_id":    kk.MemberID,
 			"book_id":      kk.BookID,
 			"chapter_id":   kk.ChapterID,
+			"last_update":  kk.LastUpdate,
 			"book_info":    bookMap[kk.BookID],
 			"chapter_info": chapterMap[kk.ChapterID],
 		}

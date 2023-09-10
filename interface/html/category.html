@@ -165,7 +165,7 @@
             let str = "<div class='panel panel-default'><div class='panel-body'><h3>" +book.book_title +
                 "</h3><p>" +book.copyright +
                 "</p><p class='book_desc'>" +book.book_desc+
-                '</p><p class="text-right"><a class="btn btn-warning" href="read.html?"' + book.id + '">去阅读</a></p></div></div>'
+                '</p><p class="text-right"><a class="btn btn-warning" href="read.html?book_id=' + book.id + '">去阅读</a></p></div></div>'
             $("#book-list").append(str)
         });
     }
