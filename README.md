@@ -60,19 +60,21 @@
 + 7.小说内容管理- 章节评论管理  http://127.0.0.1:8090/admin/info/comment
 
 ## interface 前台系统
-+ bootstrapv3.0
-+ Layer弹窗
-+ Jqueryv3.5.7
++ bootstrapv3.0 [v3手册](https://v3.bootcss.com/components/)
++ Layer弹窗 [layer2.7手册](https://layui.dev/2.7/layer/)
++ Jqueryv3.5.7 [手册地址](https://jquery.cuishifeng.cn/index.html)
 + HTML5
-+ gin框架
-+ gorm/gen model生产
++ localstrage [前端本地存储手册](http://localforage.docschina.org/#api-clear)
++ gin框架 [gin框架](github.com/gin-gonic/gin)
++ gorm/gen model生产 [orm自动代码](https://gitee.com/gorm/gen)
 + redis
-+ go-cache
++ go-cache [github地址](github.com/go-redis/redis)
 + log
 + Mysql
++ MD5 在线 [在线使用](http://www.jsons.cn/md5/s/)
 
 ## goadmin 后台管理系统
-+ go-admin
++ go-admin [文档](https://book.go-admin.cn)
 + gorm
 + gin框架
 + mysql
