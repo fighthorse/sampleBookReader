@@ -1,6 +1,3 @@
 .idea
-
 *.exe
 .vscode
-
-logs

@@ -1,4 +1,10 @@
 
+## 系统初始化sql
+1.先在数据库建一个 go_admin 库
+2.执行命令导入初始化的sql
+mysql -u user -p  go_admin < ./go_admin.sql
+
+## windows 系统 操作mysql
 要在Windows上启动MySQL服务，你需要按照以下步骤进行操作：
 
 下载MySQL安装程序：前往MySQL官方网站（https://dev.mysql.com/downloads/installer/）下载适用于Windows的MySQL安装程序。选择合适的版本（32位或64位）和安装程序类型（Web或Community）。
@@ -13,9 +19,7 @@
 
 现在，MySQL服务已经成功启动了。你可以使用MySQL客户端工具连接到MySQL服务器，执行数据库操作和查询。
 
-D:\linux\windows\mysql8.0\bin\mysqld.exe" --defaults-file="C:\ProgramData\MySQL\MySQL Server 8.1\my.ini" MySQL81
+### 参考启动命令
+mysqld.exe" --defaults-file="C:\ProgramData\MySQL\MySQL Server 8.1\my.ini" MySQL81
 
 
-1.先在数据库建一个 go_admin 库
-2.执行命令导入初始化的sql
-mysql -u user -p  go_admin < ./admin.sql

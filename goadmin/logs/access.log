@@ -1,0 +1,9 @@
+2023-09-12T09:33:08.145+0800	controller/handler.go:24	[GoAdmin] [37;44m 302 [0m [37;104m GET   [0m /admin/info/chapter
+2023-09-12T09:33:08.156+0800	controller/handler.go:24	[GoAdmin] [37;44m 200 [0m [37;104m GET   [0m /admin/login
+2023-09-12T09:33:13.029+0800	controller/handler.go:24	[GoAdmin] [37;44m 200 [0m [37;104m GET   [0m /admin/login
+2023-09-12T09:34:31.365+0800	controller/handler.go:24	[GoAdmin] [37;44m 400 [0m [37;104m POST   [0m /admin/signin
+2023-09-12T09:34:33.214+0800	controller/handler.go:24	[GoAdmin] [37;44m 200 [0m [37;104m GET   [0m /admin/login
+2023-09-12T09:34:37.564+0800	controller/handler.go:24	[GoAdmin] [37;44m 200 [0m [37;104m POST   [0m /admin/signin
+2023-09-12T09:34:41.483+0800	controller/handler.go:24	[GoAdmin] [37;44m 200 [0m [37;104m GET   [0m /admin/info/book
+2023-09-12T09:34:56.569+0800	controller/handler.go:24	[GoAdmin] [37;44m 200 [0m [37;104m GET   [0m /admin/info/chapter
+2023-09-12T09:35:14.946+0800	controller/handler.go:24	[GoAdmin] [37;44m 200 [0m [37;104m GET   [0m /admin/info/comment
